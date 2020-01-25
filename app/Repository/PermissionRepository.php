@@ -14,7 +14,7 @@ class PermissionRepository implements PermissionRepositoryInterface
 {
     public function all()
     {
-        return Permission::all();
+        return Permission::all()->pluck('name');
     }
 
     public function storeRecord($input)

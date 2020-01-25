@@ -21,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('books','BooksController');
 Route::resource('permissions','PermissionsController');
 Route::resource('roles','RolesController');
+Route::get('/allperms','RolesPermissionController@getAllPerms');
+Route::post('/assign','RolesPermissionController@assignRoles');

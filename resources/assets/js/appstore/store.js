@@ -5,7 +5,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 
     state: {
-        books:[]
+        books:[],
+        permissions:[],
+        roles:[],
+        permsroles:[]
     },
     mutations: {
         setPermissionmut(permission)
@@ -70,6 +73,39 @@ export default new Vuex.Store({
                 {
                 })
         },
+        getallPermissionsmut()
+        {
+            axios.get('/permissions')
+                .then(response => {
+                    this.state.permissions = response.data;
+                    console.log("This is the data I have gotten in regards to permissions " + this.books)
+                })
+                .catch(error =>
+                {
+                })
+        },
+        getallRolesmut()
+        {
+            axios.get('/roles')
+                .then(response => {
+                    this.state.roles = response.data;
+                    console.log("This is the data I have gotten in regards to roles " + this.books)
+                })
+                .catch(error =>
+                {
+                })
+        },
+        getallRolesPermissionsmut()
+        {
+            axios.get('/allperms')
+                .then(response => {
+                    this.state.permsroles = response.data;
+                    console.log("This is the data I have gotten in regards to roles " + this.books)
+                })
+                .catch(error =>
+                {
+                })
+        },
         deleteABookMut(state,id)
         {
             axios
@@ -95,6 +131,15 @@ export default new Vuex.Store({
             getBooks: state => {
                 return state.books
             },
+            getallPermissions:state => {
+                return state.permissions
+            },
+            getallRolesg:state => {
+                return state.roles
+            },
+            getallpermsroles:state => {
+                return state.permsroles;
+            }
         },
     actions:
         {
@@ -122,8 +167,19 @@ export default new Vuex.Store({
             addRole(state,data)
             {
                 state.commit('addRolemut',data)
+            },
+            getallPermissions(state)
+            {
+                state.commit('getallPermissionsmut')
+            },
+            getallRoles(state)
+            {
+                state.commit('getallRolesmut')
+            },
+            getallRolesPermissions(state)
+            {
+                state.commit('getallRolesPermissionsmut');
             }
-
 
         },
 

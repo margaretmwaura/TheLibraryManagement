@@ -6,14 +6,13 @@ namespace App\Repository;
 
 use App\Models\Role;
 use App\Repository\Interfaces\RoleRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class RoleRepository implements RoleRepositoryInterface
 {
     public function all()
     {
-        return Role::all();
+        return Role::all()->pluck('name');
     }
 
     public function storeRecord($input)
@@ -28,8 +27,4 @@ class RoleRepository implements RoleRepositoryInterface
         $book->delete();
     }
 
-    public function updateRecord(Request $request, $id)
-    {
-
-    }
 }
