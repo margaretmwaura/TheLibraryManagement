@@ -46217,7 +46217,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         books: [],
         permissions: [],
         roles: [],
-        permsroles: []
+        permsroles: [],
+        allUsers: []
     },
     mutations: {
         setPermissionmut: function setPermissionmut(permission) {
@@ -46275,6 +46276,14 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
                 console.log("This is the data I have gotten in regards to roles " + _this4.books);
             }).catch(function (error) {});
         },
+        getAllUsersmut: function getAllUsersmut() {
+            var _this5 = this;
+
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/users').then(function (response) {
+                _this5.state.allUsers = response.data;
+                console.log("This is the data I have gotten in regards to roles " + _this5.books);
+            }).catch(function (error) {});
+        },
         assignPermissionToRolemut: function assignPermissionToRolemut(state, data) {
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/assign', data).then(function (response) {}).catch(function (error) {});
         },
@@ -46297,6 +46306,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         getallpermsroles: function getallpermsroles(state) {
             return state.permsroles;
+        },
+        getallUsersg: function getallUsersg(state) {
+            return state.allUsers;
         }
     },
     actions: {
@@ -46329,6 +46341,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         getallRolesPermissions: function getallRolesPermissions(state) {
             state.commit('getallRolesPermissionsmut');
+        },
+        getAllUsers: function getAllUsers(state) {
+            state.commit('getAllUsersmut');
         },
         assignPermissionToRole: function assignPermissionToRole(state, data) {
             state.commit('assignPermissionToRolemut', data);
@@ -47357,7 +47372,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47478,11 +47493,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.$store.dispatch('assignPermissionToRole', this.formAssign);
         }
     },
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['getallPermissions', 'getallRolesg', 'getallpermsroles'])),
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['getallPermissions', 'getallRolesg', 'getallpermsroles', 'getallUsersg'])),
     mounted: function mounted() {
         this.$store.dispatch('getallRolesPermissions');
         this.$store.dispatch('getallRoles');
         this.$store.dispatch('getallPermissions');
+        this.$store.dispatch('getAllUsers');
     }
 });
 
@@ -47743,7 +47759,8 @@ var render = function() {
         ],
         2
       )
-    ])
+    ]),
+    _vm._v("\n    " + _vm._s(_vm.getallUsersg) + "\n")
   ])
 }
 var staticRenderFns = [

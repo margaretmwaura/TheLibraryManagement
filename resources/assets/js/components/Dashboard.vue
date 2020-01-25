@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-
+        {{getallUsersg}}
     </div>
 
 </template>
@@ -107,12 +107,13 @@
             }
         },
         computed: {
-            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles'])
+            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg'])
         },
         mounted() {
             this.$store.dispatch('getallRolesPermissions');
             this.$store.dispatch('getallRoles');
             this.$store.dispatch('getallPermissions');
+            this.$store.dispatch('getAllUsers');
         },
     }
 </script>

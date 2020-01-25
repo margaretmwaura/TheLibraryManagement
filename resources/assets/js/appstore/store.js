@@ -8,7 +8,8 @@ export default new Vuex.Store({
         books:[],
         permissions:[],
         roles:[],
-        permsroles:[]
+        permsroles:[],
+        allUsers:[]
     },
     mutations: {
         setPermissionmut(permission)
@@ -106,6 +107,17 @@ export default new Vuex.Store({
                 {
                 })
         },
+        getAllUsersmut()
+        {
+            axios.get('/users')
+                .then(response => {
+                    this.state.allUsers = response.data;
+                    console.log("This is the data I have gotten in regards to roles " + this.books)
+                })
+                .catch(error =>
+                {
+                })
+        },
         assignPermissionToRolemut(state,data)
         {
             axios.post('/assign',data)
@@ -149,6 +161,9 @@ export default new Vuex.Store({
             },
             getallpermsroles:state => {
                 return state.permsroles;
+            },
+            getallUsersg:state => {
+                return state.allUsers;
             }
         },
     actions:
@@ -189,6 +204,10 @@ export default new Vuex.Store({
             getallRolesPermissions(state)
             {
                 state.commit('getallRolesPermissionsmut');
+            },
+            getAllUsers(state)
+            {
+                state.commit('getAllUsersmut')
             },
             assignPermissionToRole(state,data)
             {
