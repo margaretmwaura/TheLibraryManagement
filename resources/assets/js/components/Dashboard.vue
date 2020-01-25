@@ -103,6 +103,7 @@
             assign()
             {
                 console.log("What we will be using for the assigning" + this.formAssign);
+                this.$store.dispatch('assignPermissionToRole',this.formAssign);
             }
         },
         computed: {

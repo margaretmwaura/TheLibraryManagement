@@ -30,8 +30,8 @@ class RolesPermissionController extends Controller
         return response()->json($collection);
     }
 
-    public function assignRoles()
+    public function assignRoles(Request $request)
     {
-
+       Log::info("The request received " . $request);
     }
 }

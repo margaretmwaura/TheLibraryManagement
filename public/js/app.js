@@ -46275,6 +46275,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
                 console.log("This is the data I have gotten in regards to roles " + _this4.books);
             }).catch(function (error) {});
         },
+        assignPermissionToRolemut: function assignPermissionToRolemut(state, data) {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/assign', data).then(function (response) {}).catch(function (error) {});
+        },
         deleteABookMut: function deleteABookMut(state, id) {
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.delete('/books/' + id, {}).then(function (response) {
                 var code = response.status;
@@ -46326,6 +46329,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         getallRolesPermissions: function getallRolesPermissions(state) {
             state.commit('getallRolesPermissionsmut');
+        },
+        assignPermissionToRole: function assignPermissionToRole(state, data) {
+            state.commit('assignPermissionToRolemut', data);
         }
     }
 
@@ -47351,7 +47357,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47469,6 +47475,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         assign: function assign() {
             console.log("What we will be using for the assigning" + this.formAssign);
+            this.$store.dispatch('assignPermissionToRole', this.formAssign);
         }
     },
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['getallPermissions', 'getallRolesg', 'getallpermsroles'])),

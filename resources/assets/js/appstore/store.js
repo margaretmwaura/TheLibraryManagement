@@ -106,6 +106,16 @@ export default new Vuex.Store({
                 {
                 })
         },
+        assignPermissionToRolemut(state,data)
+        {
+            axios.post('/assign',data)
+                .then(response => {
+
+                })
+                .catch(error =>
+                {
+                })
+        },
         deleteABookMut(state,id)
         {
             axios
@@ -179,6 +189,10 @@ export default new Vuex.Store({
             getallRolesPermissions(state)
             {
                 state.commit('getallRolesPermissionsmut');
+            },
+            assignPermissionToRole(state,data)
+            {
+                state.commit('assignPermissionToRolemut',data)
             }
 
         },
