@@ -83,7 +83,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
         @auth
-            window.perm = {!! json_encode(Auth::user()->allPermissions, true) !!};
+            window.perm = {!! json_encode(Auth::user()->role->permissions->pluck('name'), true) !!};
             console.log("The permissions gotten ",window.perm);
         @else
             window.perm = [];
