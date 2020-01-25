@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -45,6 +46,25 @@ class RolesPermissionController extends Controller
         catch (\Exception $e)
         {
             Log::info("The error while assinging roles " . $e->getMessage());
+        }
+    }
+
+    public function toggleUserRole(Request $request)
+    {
+        Log::info("The request received " . $request->input("name"));
+        Log::info("The request received role id of user " . $request->input("id"));
+        $id = $request->input("id");
+        $role_id=$request->input("role_id");
+        $user = User::find($id);
+        Log::info("The id of the user is " . $id . " while their role id is " . $role_id);
+        if($role_id==7)
+        {
+            $user->role_id=9;
+            $user->save();
+        }
+        else{
+            $user->role_id=7;
+            $user->save();
         }
     }
 }

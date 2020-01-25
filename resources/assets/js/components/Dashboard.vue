@@ -74,7 +74,23 @@
                 </div>
             </div>
         </div>
-        {{getallUsersg}}
+        <div class="grid-container">
+            <table class="table">
+                <tr>
+                    <th>User Id</th>
+                    <th> User Name </th>
+                    <th> User Role </th>
+                    <th>Change Role</th>
+                </tr>
+                <tr v-for="user in getallUsersg">
+                  <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.role_id}}</td>
+                    <td><button v-on:click="togglingPermissions(user)">Toggle Role</button></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 
 </template>
@@ -104,6 +120,10 @@
             {
                 console.log("What we will be using for the assigning" + this.formAssign);
                 this.$store.dispatch('assignPermissionToRole',this.formAssign);
+            },
+            togglingPermissions: function(user)
+            {
+                this.$store.dispatch('toggleRoles',user);
             }
         },
         computed: {

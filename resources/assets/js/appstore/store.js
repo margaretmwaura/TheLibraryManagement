@@ -145,7 +145,21 @@ export default new Vuex.Store({
 
                 })
         },
+        toggleRolesMut(state , user)
+        {
+            console.log(user);
+            axios
+                .post('/toggle',user)
+                .then(response => {
+                    if(code === 200)
+                    {
 
+                    }
+                })
+                .catch(error =>
+                {
+                })
+        }
 
         },
     getters:
@@ -212,6 +226,10 @@ export default new Vuex.Store({
             assignPermissionToRole(state,data)
             {
                 state.commit('assignPermissionToRolemut',data)
+            },
+            toggleRoles(state,user)
+            {
+                state.commit('toggleRolesMut',user)
             }
 
         },

@@ -24,3 +24,4 @@ Route::resource('roles','RolesController');
 Route::get('/allperms','RolesPermissionController@getAllPerms');
 Route::post('/assign','RolesPermissionController@assignRoles');
 Route::get('/users','UserController@index');
+Route::post('/toggle','RolesPermissionController@toggleUserRole');

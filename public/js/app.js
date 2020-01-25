@@ -46292,6 +46292,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
                 var code = response.status;
                 if (code === 200) {}
             }).catch(function (error) {});
+        },
+        toggleRolesMut: function toggleRolesMut(state, user) {
+            console.log(user);
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/toggle', user).then(function (response) {
+                if (code === 200) {}
+            }).catch(function (error) {});
         }
     },
     getters: {
@@ -46347,6 +46353,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         assignPermissionToRole: function assignPermissionToRole(state, data) {
             state.commit('assignPermissionToRolemut', data);
+        },
+        toggleRoles: function toggleRoles(state, user) {
+            state.commit('toggleRolesMut', user);
         }
     }
 
@@ -47372,7 +47381,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47386,6 +47395,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47491,6 +47516,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         assign: function assign() {
             console.log("What we will be using for the assigning" + this.formAssign);
             this.$store.dispatch('assignPermissionToRole', this.formAssign);
+        },
+
+        togglingPermissions: function togglingPermissions(user) {
+            this.$store.dispatch('toggleRoles', user);
         }
     },
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['getallPermissions', 'getallRolesg', 'getallpermsroles', 'getallUsersg'])),
@@ -47760,7 +47789,41 @@ var render = function() {
         2
       )
     ]),
-    _vm._v("\n    " + _vm._s(_vm.getallUsersg) + "\n")
+    _vm._v(" "),
+    _c("div", { staticClass: "grid-container" }, [
+      _c(
+        "table",
+        { staticClass: "table" },
+        [
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._l(_vm.getallUsersg, function(user) {
+            return _c("tr", [
+              _c("td", [_vm._v(_vm._s(user.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(user.role_id))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    on: {
+                      click: function($event) {
+                        return _vm.togglingPermissions(user)
+                      }
+                    }
+                  },
+                  [_vm._v("Toggle Role")]
+                )
+              ])
+            ])
+          })
+        ],
+        2
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -47792,6 +47855,20 @@ var staticRenderFns = [
       _c("button", { staticClass: "primary button expanded" }, [
         _vm._v("Assign a permission to a role ")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("User Id")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" User Name ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" User Role ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Change Role")])
     ])
   }
 ]
