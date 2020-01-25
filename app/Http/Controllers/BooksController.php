@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
 use App\Repository\Interfaces\BookRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,10 +9,6 @@ use Illuminate\Support\Facades\Log;
 class BooksController extends Controller
 {
 
-//    public $bookRepository;
-    /**
-     * @var BookRepositoryInterface
-     */
     public $bookRepository;
 
     public function __construct(BookRepositoryInterface $bookRepository)

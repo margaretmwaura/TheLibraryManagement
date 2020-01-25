@@ -28,6 +28,38 @@ export default new Vuex.Store({
                 {
                 })
         },
+        addPermissionmut(state,data)
+        {
+            console.log(data);
+            axios
+                .post('/permissions',data)
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+
+                    }
+                })
+                .catch(error =>
+                {
+                })
+        },
+        addRolemut(state,data)
+        {
+            console.log(data);
+            axios
+                .post('/roles',data)
+                .then(response => {
+                    var code = response.status;
+                    if(code === 200)
+                    {
+
+                    }
+                })
+                .catch(error =>
+                {
+                })
+        },
         getallbooksmut()
         {
             axios.get('/books')
@@ -83,7 +115,16 @@ export default new Vuex.Store({
             deleteABook(state,id)
             {
                 state.commit('deleteABookMut',id)
+            },
+            addPermission(state,data)
+            {
+                state.commit('addPermissionmut',data)
+            },
+            addRole(state,data)
+            {
+                state.commit('addRolemut',data)
             }
+
 
         },
 

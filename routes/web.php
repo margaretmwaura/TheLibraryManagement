@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('books','BooksController');
+Route::resource('permissions','PermissionsController');
+Route::resource('roles','RolesController');

@@ -7,7 +7,6 @@ namespace App\Repository;
 use App\Models\Book;
 use App\Repository\Interfaces\BookRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class BookRepository implements BookRepositoryInterface
