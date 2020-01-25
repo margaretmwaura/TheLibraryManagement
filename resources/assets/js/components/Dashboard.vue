@@ -8,7 +8,7 @@
                 <div class="grid-x grid-padding-x">
                     <div class="cell medium-12 large-12 small-12">
                         <label>Name
-                            <input type="text" v-model="roleName">
+                            <input type="text" v-model="form.name">
                         </label>
                     </div>
                     <div class="cell medium-12 large-12 small-12">
@@ -25,7 +25,7 @@
                 <div class="grid-x grid-padding-x">
                     <div class="cell medium-12 large-12 small-12">
                         <label>Name
-                            <input type="text" v-model="permissionName">
+                            <input type="text" v-model="form.name">
                         </label>
                     </div>
                     <div class="cell medium-12 large-12 small-12">
@@ -43,19 +43,18 @@
         name: "Dashboard",
         data() {
             return {
-                roleName: ' ',
-                permissionName : ' '
+                form:{}
             }
         },
         methods: {
             addRole() {
                 console.log("Adding roles");
-                this.$store.dispatch('addRole',this.roleName);
+                this.$store.dispatch('addRole',this.form);
             },
             addPermission()
             {
                 console.log("Adding permissions");
-                this.$store.dispatch('addPermission',this.permissionName);
+                this.$store.dispatch('addPermission',this.form);
             }
         },
     }

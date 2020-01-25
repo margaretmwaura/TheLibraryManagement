@@ -8,11 +8,9 @@ class Role extends Model
 {
     //
     protected $table = 'roles';
-    protected $fillable = [
-        'name',
-    ];
+    protected $guarded = ['id'];
 
-    public function Permission()
+    public function permissions()
     {
         return $this->belongsToMany(Permission::class);
     }

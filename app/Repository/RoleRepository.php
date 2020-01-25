@@ -19,7 +19,6 @@ class RoleRepository implements RoleRepositoryInterface
     public function storeRecord($input)
     {
         return Role::create($input);
-
     }
 
     public function deleteRecord($id)

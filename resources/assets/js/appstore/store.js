@@ -14,7 +14,7 @@ export default new Vuex.Store({
         },
         addbookmut(state,data)
         {
-            console.log(data)
+            console.log(data);
             axios
                 .post('/books',data)
                 .then(response => {
@@ -50,7 +50,6 @@ export default new Vuex.Store({
             axios
                 .post('/roles',data)
                 .then(response => {
-                    var code = response.status;
                     if(code === 200)
                     {
 
