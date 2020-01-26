@@ -90,8 +90,30 @@
                 </tr>
             </table>
         </div>
+        <div class="grid-container">
+            <table class="table" v-for="books in getallorderednreserved">
+                <tr>
+                    <th>Book name</th>
+                    <th> Book Category </th>
+                    <th> Book Release year </th>
+                    <th> Book Borrow Date </th>
+                    <th>Book Due Date</th>
+                    <th>Book Reserve date</th>
+                    <th>Assoicated User </th>
+                </tr>
+                    <tr v-for="book in books">
+                        <td>{{book.name}}</td>
+                        <td>{{book.category}}</td>
+                        <td>{{book.year}}</td>
+                        <td>{{book.borrow_date}}</td>
+                        <td>{{book.due_date}}</td>
+                        <td>{{book.reserve_date}}</td>
+                        <td>{{book.pivot.user_id}}</td>
+                    </tr>
 
-        {{getallorderednreserved}}
+            </table>
+        </div>
+{{getallorderednreserved}}
     </div>
 
 </template>

@@ -47450,7 +47450,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47464,6 +47464,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47629,7 +47651,7 @@ var render = function() {
             _c("div", { staticClass: "grid-x grid-padding-x" }, [
               _c("div", { staticClass: "cell medium-12 large-12 small-12" }, [
                 _c("label", [
-                  _vm._v("Name\n                            "),
+                  _vm._v("Name\n                                "),
                   _c("input", {
                     directives: [
                       {
@@ -47678,7 +47700,7 @@ var render = function() {
             _c("div", { staticClass: "grid-x grid-padding-x" }, [
               _c("div", { staticClass: "cell medium-12 large-12 small-12" }, [
                 _c("label", [
-                  _vm._v("Name\n                            "),
+                  _vm._v("Name\n                                "),
                   _c("input", {
                     directives: [
                       {
@@ -47895,7 +47917,41 @@ var render = function() {
         2
       )
     ]),
-    _vm._v("\n\n    " + _vm._s(_vm.getallorderednreserved) + "\n")
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "grid-container" },
+      _vm._l(_vm.getallorderednreserved, function(books) {
+        return _c(
+          "table",
+          { staticClass: "table" },
+          [
+            _vm._m(4, true),
+            _vm._v(" "),
+            _vm._l(books, function(book) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(book.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(book.category))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(book.year))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(book.borrow_date))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(book.due_date))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(book.reserve_date))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(book.pivot.user_id))])
+              ])
+            })
+          ],
+          2
+        )
+      }),
+      0
+    ),
+    _vm._v("\n" + _vm._s(_vm.getallorderednreserved) + "\n    ")
   ])
 }
 var staticRenderFns = [
@@ -47941,6 +47997,26 @@ var staticRenderFns = [
       _c("th", [_vm._v(" User Role ")]),
       _vm._v(" "),
       _c("th", [_vm._v("Change Role")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("Book name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Book Category ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Book Release year ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v(" Book Borrow Date ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Book Due Date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Book Reserve date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Assoicated User ")])
     ])
   }
 ]
