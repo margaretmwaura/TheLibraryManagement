@@ -18,6 +18,7 @@ class BookUsersController extends Controller
         Log::info("Currently logged in user " . Auth::user()->id);
         $id = $request->input("id");
         $user_id=Auth::user()->id;
+        $email=Auth::user()->email;
 
         $current = Carbon::now();
         $trialExpires = $current->addDays(14);
@@ -27,7 +28,7 @@ class BookUsersController extends Controller
         $book->due_date=$trialExpires;
 
         $book->save();
-        $book->users()->attach($user_id,['due_date' => Carbon::now(),'order_date' => $trialExpires]);
+        $book->users()->attach($user_id,['due_date' => Carbon::now(),'order_date' => $trialExpires,'email'=>$email]);
     }
     public function reservebook(Request $request)
     {
@@ -35,11 +36,13 @@ class BookUsersController extends Controller
         Log::info("Currently logged in user " . Auth::user()->id);
         $id = $request->input("id");
         $user_id=Auth::user()->id;
+        $email=Auth::user()->email;
+
 
         $book = Book::find($id);
         $book->reserve_date=Carbon::now();
         $book->save();
-        $book->users()->attach($user_id,['borrow_date' => Carbon::now()]);
+        $book->users()->attach($user_id,['borrow_date' => Carbon::now(),'email'=>$email]);
     }
     public function getAllBooks()
     {

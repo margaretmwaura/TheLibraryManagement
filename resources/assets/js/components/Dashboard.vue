@@ -108,12 +108,12 @@
                         <td>{{book.borrow_date}}</td>
                         <td>{{book.due_date}}</td>
                         <td>{{book.reserve_date}}</td>
-                        <td>{{book.pivot.user_id}}</td>
+                        <td>{{book.pivot.email}}</td>
                     </tr>
 
             </table>
         </div>
-{{getallorderednreserved}}
+
     </div>
 
 </template>

@@ -47942,7 +47942,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(book.reserve_date))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(book.pivot.user_id))])
+                _c("td", [_vm._v(_vm._s(book.pivot.email))])
               ])
             })
           ],

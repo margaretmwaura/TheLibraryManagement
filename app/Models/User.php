@@ -24,7 +24,7 @@ class User extends Authenticatable
     }
     public function books()
     {
-        return $this->belongsToMany(Book::class);
+        return $this->belongsToMany(Book::class)->withPivot('email');
     }
     protected $hidden = [
         'password', 'remember_token',
