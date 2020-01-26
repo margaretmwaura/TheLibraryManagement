@@ -198,6 +198,26 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
+        },
+        loginusermut()
+        {
+            axios.get('/login')
+                .then(response => {
+
+                })
+                .catch(error =>
+                {
+                })
+        },
+        registerusermut()
+        {
+            axios.get('/register')
+                .then(response => {
+
+                })
+                .catch(error =>
+                {
+                })
         }
 
         },
@@ -284,8 +304,15 @@ export default new Vuex.Store({
             getallorderedandreservedbooks(state)
             {
                 state.commit('getallorderedandreservedbooksmut')
+            },
+            loginuser(state)
+            {
+                state.commit('loginusermut')
+            },
+            registeruser(state)
+            {
+                state.commit('registerusermut')
             }
-
 
         },
 

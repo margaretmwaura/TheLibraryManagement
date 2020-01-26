@@ -46101,7 +46101,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -46156,9 +46156,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "App.vue"
+    name: "App.vue",
+    methods: {
+        login: function login() {
+            this.$store.dispatch('loginuser');
+        },
+        register: function register() {
+            this.$store.dispatch('registeruser');
+        }
+    }
 });
 
 /***/ }),
@@ -46181,6 +46191,10 @@ var render = function() {
       _c("router-link", { attrs: { to: "/dashboard" } }, [
         _vm._v(" Navigate To DashBoard ")
       ]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.login } }, [_vm._v("Login")]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.register } }, [_vm._v("Register")]),
       _vm._v(" "),
       _c("router-view")
     ],
@@ -46316,6 +46330,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/getallbooks').then(function (response) {
                 _this6.state.allorderednreserved = response.data;
             }).catch(function (error) {});
+        },
+        loginusermut: function loginusermut() {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/login').then(function (response) {}).catch(function (error) {});
+        },
+        registerusermut: function registerusermut() {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/register').then(function (response) {}).catch(function (error) {});
         }
     },
     getters: {
@@ -46386,6 +46406,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         getallorderedandreservedbooks: function getallorderedandreservedbooks(state) {
             state.commit('getallorderedandreservedbooksmut');
+        },
+        loginuser: function loginuser(state) {
+            state.commit('loginusermut');
+        },
+        registeruser: function registeruser(state) {
+            state.commit('registerusermut');
         }
     }
 
@@ -47651,7 +47677,7 @@ var render = function() {
             _c("div", { staticClass: "grid-x grid-padding-x" }, [
               _c("div", { staticClass: "cell medium-12 large-12 small-12" }, [
                 _c("label", [
-                  _vm._v("Name\n                                "),
+                  _vm._v("Name\n                            "),
                   _c("input", {
                     directives: [
                       {
@@ -47700,7 +47726,7 @@ var render = function() {
             _c("div", { staticClass: "grid-x grid-padding-x" }, [
               _c("div", { staticClass: "cell medium-12 large-12 small-12" }, [
                 _c("label", [
-                  _vm._v("Name\n                                "),
+                  _vm._v("Name\n                            "),
                   _c("input", {
                     directives: [
                       {
@@ -47950,8 +47976,7 @@ var render = function() {
         )
       }),
       0
-    ),
-    _vm._v("\n" + _vm._s(_vm.getallorderednreserved) + "\n    ")
+    )
   ])
 }
 var staticRenderFns = [
