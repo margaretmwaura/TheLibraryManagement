@@ -10,8 +10,8 @@ class Admin
 
     public function handle($request, Closure $next)
     {
-        $role = Auth::user()->role;
-        if($role == 'Admin')
+        $role = Auth::user()->role_id;
+        if($role == 9)
         {
             Log::info("User is Admin");
             return $next($request);

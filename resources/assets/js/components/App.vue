@@ -1,4 +1,6 @@
 <template>
+    <v-app>
+        <v-content>
     <div>
         <router-link to="/add"> Add Book</router-link>
         <router-link to="/display"> Display books</router-link>
@@ -8,7 +10,8 @@
         <router-view></router-view>
 
     </div>
-
+        </v-content>
+   </v-app>
 </template>
 
 <script>

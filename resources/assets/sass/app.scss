@@ -5,8 +5,12 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+//// Bootstrap
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+//@import '~vuetify/dist/vuetify.min.css';
+
+@import '~vuetify/dist/vuetify.min.css';
 
 @import "../../../foundation/css/app.css";
 @import "../../../foundation/css/foundation.css";
