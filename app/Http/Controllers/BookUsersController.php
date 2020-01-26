@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,5 +31,25 @@ class BookUsersController extends Controller
         $user_id=Auth::user()->id;
         $book = Book::find($id);
         $book->users()->attach($user_id,['borrow_date' => Carbon::now()]);
+    }
+    public function getAllBooks()
+    {
+        $users = User::all();
+        $bookcollection = collect([]);
+        try{
+            $users->each(function ($item, $key) use ($bookcollection) {
+
+                Log::info($item->id);
+                Log::info($item->books->pluck('name'));
+                $bookcollection->push($item->books->pluck('name'));
+                Log::info($bookcollection);
+
+            });
+        }
+        catch (\Exception $e)
+        {
+            Log::info("The reasons for not getting the collection " . $e->getMessage());
+        }
+        return response()->json($bookcollection);
     }
 }

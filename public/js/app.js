@@ -46218,7 +46218,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         permissions: [],
         roles: [],
         permsroles: [],
-        allUsers: []
+        allUsers: [],
+        allorderednreserved: []
     },
     mutations: {
         setPermissionmut: function setPermissionmut(permission) {
@@ -46308,6 +46309,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/reservebook', book).then(function (response) {
                 if (code === 200) {}
             }).catch(function (error) {});
+        },
+        getallorderedandreservedbooksmut: function getallorderedandreservedbooksmut() {
+            var _this6 = this;
+
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/getallbooks').then(function (response) {
+                _this6.state.allorderednreserved = response.data;
+            }).catch(function (error) {});
         }
     },
     getters: {
@@ -46325,6 +46333,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         getallUsersg: function getallUsersg(state) {
             return state.allUsers;
+        },
+        getallorderednreserved: function getallorderednreserved(state) {
+            return state.allorderednreserved;
         }
     },
     actions: {
@@ -46372,6 +46383,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         reserveBook: function reserveBook(state, book) {
             state.commit('reserveBookmut', book);
+        },
+        getallorderedandreservedbooks: function getallorderedandreservedbooks(state) {
+            state.commit('getallorderedandreservedbooksmut');
         }
     }
 
@@ -47436,7 +47450,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47450,6 +47464,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -47577,12 +47592,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.$store.dispatch('toggleRoles', user);
         }
     },
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['getallPermissions', 'getallRolesg', 'getallpermsroles', 'getallUsersg'])),
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['getallPermissions', 'getallRolesg', 'getallpermsroles', 'getallUsersg', 'getallorderednreserved'])),
     mounted: function mounted() {
         this.$store.dispatch('getallRolesPermissions');
         this.$store.dispatch('getallRoles');
         this.$store.dispatch('getallPermissions');
         this.$store.dispatch('getAllUsers');
+        this.$store.dispatch('getallorderedandreservedbooks');
     }
 });
 
@@ -47878,7 +47894,8 @@ var render = function() {
         ],
         2
       )
-    ])
+    ]),
+    _vm._v("\n\n    " + _vm._s(_vm.getallorderednreserved) + "\n")
   ])
 }
 var staticRenderFns = [

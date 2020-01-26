@@ -91,6 +91,7 @@
             </table>
         </div>
 
+        {{getallorderednreserved}}
     </div>
 
 </template>
@@ -127,13 +128,14 @@
             }
         },
         computed: {
-            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg'])
+            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg','getallorderednreserved'])
         },
         mounted() {
             this.$store.dispatch('getallRolesPermissions');
             this.$store.dispatch('getallRoles');
             this.$store.dispatch('getallPermissions');
             this.$store.dispatch('getAllUsers');
+            this.$store.dispatch('getallorderedandreservedbooks');
         },
     }
 </script>

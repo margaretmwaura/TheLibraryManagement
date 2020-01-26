@@ -27,3 +27,4 @@ Route::get('/users','UserController@index');
 Route::post('/toggle','RolesPermissionController@toggleUserRole');
 Route::post('/orderbook','BookUsersController@orderBook');
 Route::post('/reservebook','BookUsersController@reservebook');
+Route::get('/getallbooks','BookUsersController@getAllBooks');
