@@ -22,7 +22,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-    public function Book()
+    public function books()
     {
         return $this->belongsToMany(Book::class);
     }

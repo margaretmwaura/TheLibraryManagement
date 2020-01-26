@@ -46298,6 +46298,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
             __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/toggle', user).then(function (response) {
                 if (code === 200) {}
             }).catch(function (error) {});
+        },
+        orderBookmut: function orderBookmut(state, book) {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/orderbook', book).then(function (response) {
+                if (code === 200) {}
+            }).catch(function (error) {});
+        },
+        reserveBookmut: function reserveBookmut(state, book) {
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/reservebook', book).then(function (response) {
+                if (code === 200) {}
+            }).catch(function (error) {});
         }
     },
     getters: {
@@ -46356,6 +46366,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         },
         toggleRoles: function toggleRoles(state, user) {
             state.commit('toggleRolesMut', user);
+        },
+        orderBook: function orderBook(state, book) {
+            state.commit('orderBookmut', book);
+        },
+        reserveBook: function reserveBook(state, book) {
+            state.commit('reserveBookmut', book);
         }
     }
 
@@ -47184,7 +47200,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47198,6 +47214,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
 //
 //
 //
@@ -47236,6 +47254,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     book: book
                 }
             });
+        },
+        orderBook: function orderBook(book) {
+            this.$store.dispatch('orderBook', book);
+        },
+        reserveBook: function reserveBook(book) {
+            this.$store.dispatch('reserveBook', book);
         }
     }
 });
@@ -47254,11 +47278,15 @@ var render = function() {
       _c("p", [_vm._v("Will be displaying books in here ")]),
       _vm._v(" "),
       _vm._l(_vm.getBooks, function(book) {
-        return _c("div", [
-          _vm._v("\n        " + _vm._s(book.name) + "\n        "),
+        return _c("div", { staticClass: "grid-frame" }, [
+          _c("p", { staticStyle: { "margin-right": "30px" } }, [
+            _vm._v(" " + _vm._s(book.name) + " ")
+          ]),
+          _vm._v(" "),
           _c(
             "button",
             {
+              staticStyle: { "margin-right": "30px" },
               on: {
                 click: function($event) {
                   return _vm.deleting(book.id)
@@ -47271,6 +47299,7 @@ var render = function() {
           _c(
             "button",
             {
+              staticStyle: { "margin-right": "30px" },
               on: {
                 click: function($event) {
                   return _vm.editting(book)
@@ -47278,6 +47307,32 @@ var render = function() {
               }
             },
             [_vm._v("Edit a book")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticStyle: { "margin-right": "30px" },
+              on: {
+                click: function($event) {
+                  return _vm.reserveBook(book)
+                }
+              }
+            },
+            [_vm._v("Reserve Book")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticStyle: { "margin-right": "30px" },
+              on: {
+                click: function($event) {
+                  return _vm.orderBook(book)
+                }
+              }
+            },
+            [_vm._v("Borrow Book")]
           )
         ])
       })

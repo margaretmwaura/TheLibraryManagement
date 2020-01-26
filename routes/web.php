@@ -25,3 +25,5 @@ Route::get('/allperms','RolesPermissionController@getAllPerms');
 Route::post('/assign','RolesPermissionController@assignRoles');
 Route::get('/users','UserController@index');
 Route::post('/toggle','RolesPermissionController@toggleUserRole');
+Route::post('/orderbook','BookUsersController@orderBook');
+Route::post('/reservebook','BookUsersController@reservebook');

@@ -2,10 +2,12 @@
     <div>
         <p>Will be displaying books in here </p>
 
-        <div v-for="book in getBooks">
-            {{book.name}}
-            <button v-on:click="deleting(book.id)">Deleting a book </button>
-            <button v-on:click="editting(book)">Edit a book</button>
+        <div v-for="book in getBooks" class="grid-frame">
+            <p style="margin-right: 30px"> {{book.name}} </p>
+            <button v-on:click="deleting(book.id)" style="margin-right: 30px">Deleting a book </button>
+            <button v-on:click="editting(book)" style="margin-right: 30px">Edit a book</button>
+            <button style="margin-right: 30px" v-on:click="reserveBook(book)" >Reserve Book</button>
+            <button style="margin-right: 30px" v-on:click="orderBook(book)" >Borrow Book</button>
         </div>
 
 
@@ -39,6 +41,14 @@
                         book: book,
                     }
                 });
+            },
+            orderBook(book)
+            {
+                this.$store.dispatch('orderBook',book);
+            },
+            reserveBook(book)
+            {
+                this.$store.dispatch('reserveBook',book);
             }
         }
     }

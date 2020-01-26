@@ -159,6 +159,34 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
+        },
+        orderBookmut(state,book)
+        {
+            axios
+                .post('/orderbook',book)
+                .then(response => {
+                    if(code === 200)
+                    {
+
+                    }
+                })
+                .catch(error =>
+                {
+                })
+        },
+        reserveBookmut(state,book)
+        {
+            axios
+                .post('/reservebook',book)
+                .then(response => {
+                    if(code === 200)
+                    {
+
+                    }
+                })
+                .catch(error =>
+                {
+                })
         }
 
         },
@@ -230,7 +258,16 @@ export default new Vuex.Store({
             toggleRoles(state,user)
             {
                 state.commit('toggleRolesMut',user)
+            },
+            orderBook(state,book)
+            {
+                state.commit('orderBookmut',book)
+            },
+            reserveBook(state,book)
+            {
+                state.commit('reserveBookmut',book)
             }
+
 
         },
 

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    protected $table ='Book';
 
     protected $guarded = ['id'];
 
@@ -14,8 +13,8 @@ class Book extends Model
     {
         return $this->belongsTo(Status::class);
     }
-    public function User()
+    public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('due_date', 'borrow_date','order_date')->withTimestamps();
     }
 }
