@@ -62,7 +62,7 @@
                     <tr v-for="user in getallUsersg">
                         <td>{{user.id}}</td>
                         <td>{{user.name}}</td>
-                        <td>{{user.role_id}}</td>
+                        <td>{{roleidname(user.role_id)}}</td>
                         <td><button v-on:click="togglingPermissions(user)">Toggle Role</button></td>
                     </tr>
                 </table>
@@ -128,6 +128,21 @@
             togglingPermissions: function(user)
             {
                 this.$store.dispatch('toggleRoles',user);
+            },
+            roleidname(id)
+            {
+                if(id === 7)
+                {
+                    return "User";
+                }
+                if(id === 9)
+                {
+                    return "Admin";
+                }
+                if(id === 11)
+                {
+                    return "Normal user"
+                }
             }
         },
         mounted() {
