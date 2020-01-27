@@ -51,19 +51,25 @@ class RolesPermissionController extends Controller
 
     public function toggleUserRole(Request $request)
     {
-        Log::info("The request received " . $request->input("name"));
-        Log::info("The request received role id of user " . $request->input("id"));
-        $id = $request->input("id");
-        $role_id=$request->input("role_id");
+        $id=$request->input("id");
+        $newrole=$request->input("role");
+        Log::info("The request received in terms of role" . $newrole);
+        Log::info("The request received role id of user " . $id);
         $user = User::find($id);
-        Log::info("The id of the user is " . $id . " while their role id is " . $role_id);
-        if($role_id==7)
+
+        if($newrole=="Admin")
         {
             $user->role_id=9;
             $user->save();
         }
-        else{
+        if($newrole=="User")
+        {
             $user->role_id=7;
+            $user->save();
+        }
+        if($newrole=="Normal")
+        {
+            $user->role_id=11;
             $user->save();
         }
     }

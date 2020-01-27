@@ -26,7 +26,7 @@
                     <v-select v-model="formAssign.role" :items="getallRolesg"  :error-messages="selectErrors" label="Item"
                               required>
                     </v-select>
-                    <v-select v-model="formAssign.permission" :items="getallPermissions" v-bind:value="permission" :error-messages="selectErrors" label="Item"
+                    <v-select v-model="formAssign.permission" :items="getallPermissions"  :error-messages="selectErrors" label="Item"
                     > </v-select>
                     <v-btn class="mr-4" @click="assign">submit</v-btn>
                 </form>
@@ -63,7 +63,9 @@
                         <td>{{user.id}}</td>
                         <td>{{user.name}}</td>
                         <td>{{roleidname(user.role_id)}}</td>
-                        <td><button v-on:click="togglingPermissions(user)">Toggle Role</button></td>
+                        <td>
+                            <popup v-bind:user=user ></popup>
+                        </td>
                     </tr>
                 </table>
             </v-flex>
@@ -72,10 +74,12 @@
 </template>
 
 <script>
+    import Popup from "./Popup";
     import { validationMixin } from 'vuelidate'
     import { required, maxLength, email } from 'vuelidate/lib/validators'
     import {mapGetters} from "vuex";
     export default {
+        components: {Popup},
         mixins: [validationMixin],
         validations: {
             select: { required },
@@ -98,6 +102,7 @@
                 form:{},
                 forma:{},
                 formAssign:{},
+                formChange:{},
 
             }
         },
@@ -127,6 +132,7 @@
             },
             togglingPermissions: function(user)
             {
+                console.log("This is the choosen permission " + this.formChange.role);
                 this.$store.dispatch('toggleRoles',user);
             },
             roleidname(id)
@@ -143,7 +149,11 @@
                 {
                     return "Normal user"
                 }
-            }
+            },
+            showSubscriptions() {
+                console.log("Opening the modal " + this.showModal);
+                this.showModal = true;
+            },
         },
         mounted() {
             this.$store.dispatch('getallRolesPermissions');
