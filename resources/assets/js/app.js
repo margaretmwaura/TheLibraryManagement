@@ -5,6 +5,7 @@ window.Vue = require('vue');
 import Permissions from './mixins/Permissions';
 import router from "./approuters/router";
 
+
 import Vuetify from 'vuetify'
 Vue.use(Vuetify);
 

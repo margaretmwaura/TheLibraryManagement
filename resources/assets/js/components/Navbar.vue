@@ -29,6 +29,7 @@
 </template>
 
 <script>
+
     export default {
         name: "Navbar",
         data()
@@ -36,9 +37,9 @@
             return{
                 drawer:false,
                 links: [
-                    { title: 'Dashboard' , icon: 'mdi-view-dashboard',route : '/add'},
-                    { title: 'Account' },
-                    { title: 'Admin'},
+                    { title: 'R/P management' , icon: 'mdi-account-arrow-right',route : '/rolesnperm'},
+                    { title: 'B/Management' , icon: 'mdi-book-open-page-variant',route : '/bookman'},
+                    { title: 'Display' , icon: 'mdi-view-dashboard',route : '/display'},
                 ],
             }
         }
