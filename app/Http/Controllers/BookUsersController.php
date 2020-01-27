@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class BookUsersController extends Controller
@@ -64,6 +65,26 @@ class BookUsersController extends Controller
         }
         return response()->json($bookcollection);
     }
+    public function sendingemails()
+    {
+      $data = DB::table('book_user')->select("due_date","order_date","email")->whereNotNull("due_date")->get();
+        try{
+            $data->each(function ($item, $key) {
+                Log::info("The due date " .$item->due_date);
+                Log::info("The order date " . $item->order_date);
+                $due = $item->due_date;
+                $oder = $item->order_date;
+                $due_date = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i',$due);
+                $order_date = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i',$oder);
+                $diff = $due_date->diffInDays($order_date);
+                Log::info("This is the difference in days " . $diff);
+            });
+        }
+        catch (\Exception $e)
+        {
+            Log::info("The reasons for not getting the collection " . $e->getMessage());
+        }
+    }
     public function returnbook(Request $request)
     {
         $bookname = $request->input("name");
@@ -74,5 +95,12 @@ class BookUsersController extends Controller
       $book->save();
       Log::info("We have tried updating the book");
 
+    }
+    public function getBooks()
+    {
+        $user = Auth::user();
+        $count = $user->books->count();
+        Log::info("These are the number of books linked to the user " . $count);
+        return response($count);
     }
 }

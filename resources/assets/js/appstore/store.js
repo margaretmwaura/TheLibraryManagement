@@ -10,7 +10,8 @@ export default new Vuex.Store({
         roles:[],
         permsroles:[],
         allUsers:[],
-        allorderednreserved:[]
+        allorderednreserved:[],
+        bookscount:0
     },
     mutations: {
         setPermissionmut(permission)
@@ -233,6 +234,19 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
+        },
+        getallusersbooksmut()
+        {
+            axios
+                .get('/bookscount')
+                .then(response => {
+                        console.log("This is the response " + response);
+                        this.state.bookscount = response.data;
+
+                })
+                .catch(error =>
+                {
+                })
         }
 
         },
@@ -255,7 +269,12 @@ export default new Vuex.Store({
             },
             getallorderednreserved:state => {
                 return state.allorderednreserved;
+            },
+            getbookscount:state => {
+                return state.bookscount;
             }
+
+
         },
     actions:
         {
@@ -331,8 +350,11 @@ export default new Vuex.Store({
             returnbook(state,data)
             {
                 state.commit("returnbookmut",data)
+            },
+            getallusersbooks(state)
+            {
+                state.commit("getallusersbooksmut")
             }
-
         },
 
 

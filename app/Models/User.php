@@ -14,18 +14,22 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
     public function department()
     {
         return $this->belongsTo(Department::class);
     }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
     }
+
     public function books()
     {
         return $this->belongsToMany(Book::class)->withPivot('email');
     }
+
     protected $hidden = [
         'password', 'remember_token',
     ];

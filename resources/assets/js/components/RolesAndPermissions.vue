@@ -107,7 +107,7 @@
             }
         },
         computed: {
-            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg','getallorderednreserved']),
+            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg']),
             selectErrors () {
                 const errors = [];
                 if (!this.$v.select.$dirty) return errors
@@ -160,7 +160,6 @@
             this.$store.dispatch('getallRoles');
             this.$store.dispatch('getallPermissions');
             this.$store.dispatch('getAllUsers');
-            this.$store.dispatch('getallorderedandreservedbooks');
         },
     }
 </script>

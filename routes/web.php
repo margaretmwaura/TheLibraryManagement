@@ -29,3 +29,5 @@ Route::post('/orderbook','BookUsersController@orderBook');
 Route::post('/reservebook','BookUsersController@reservebook');
 Route::get('/getallbooks','BookUsersController@getAllBooks');
 Route::post('/returnbook','BookUsersController@returnbook');
+Route::get('/bookscount','BookUsersController@getBooks');
+Route::get('/emailing','BookUsersController@sendingemails');
