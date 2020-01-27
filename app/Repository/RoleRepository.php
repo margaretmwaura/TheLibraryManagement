@@ -22,7 +22,8 @@ class RoleRepository implements RoleRepositoryInterface
        {
            Log::info("Error while getting the role is " . $e->getMessage());
        }
-        Log::info("The permissions of the authenticated user " .$role);
+       //The commented out line was causing an error
+//        Log::info("The permissions of the authenticated user " .$role);
         return Role::all()->pluck('name');
     }
 

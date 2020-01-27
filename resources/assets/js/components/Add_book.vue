@@ -35,6 +35,8 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "Add_book",
         data() {
@@ -46,6 +48,16 @@
             create() {
                 this.$store.dispatch('addbook',this.form);
             }
+        },
+        computed: {
+            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg','getallorderednreserved'])
+        },
+        mounted() {
+            this.$store.dispatch('getallRolesPermissions');
+            this.$store.dispatch('getallRoles');
+            this.$store.dispatch('getallPermissions');
+            this.$store.dispatch('getAllUsers');
+            this.$store.dispatch('getallorderedandreservedbooks');
         },
     }
 </script>
