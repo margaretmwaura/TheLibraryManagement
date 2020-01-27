@@ -64,4 +64,15 @@ class BookUsersController extends Controller
         }
         return response()->json($bookcollection);
     }
+    public function returnbook(Request $request)
+    {
+        $bookname = $request->input("name");
+        $bookid = $request->input("id");
+      Log::info("User has returned the book which is " . $bookname . " and its id is " . $bookid);
+      $book = Book::find($bookid);
+      $book->return_date= Carbon::now();
+      $book->save();
+      Log::info("We have tried updating the book");
+
+    }
 }

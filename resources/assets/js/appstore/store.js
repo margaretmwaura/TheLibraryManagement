@@ -218,6 +218,21 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
+        },
+        returnbookmut(state,data)
+        {
+            console.log(data);
+            axios
+                .post('/returnbook',data)
+                .then(response => {
+                    if(code === 200)
+                    {
+
+                    }
+                })
+                .catch(error =>
+                {
+                })
         }
 
         },
@@ -312,6 +327,10 @@ export default new Vuex.Store({
             registeruser(state)
             {
                 state.commit('registerusermut')
+            },
+            returnbook(state,data)
+            {
+                state.commit("returnbookmut",data)
             }
 
         },

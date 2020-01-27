@@ -27,6 +27,8 @@
                     <th>Book Due Date</th>
                     <th>Book Reserve date</th>
                     <th>Assoicated User </th>
+                    <th>Return date</th>
+                    <th>Return book</th>
                 </tr>
                 <tr v-for="book in books">
                     <td>{{book.name}}</td>
@@ -36,6 +38,8 @@
                     <td>{{book.due_date}}</td>
                     <td>{{book.reserve_date}}</td>
                     <td>{{book.pivot.email}}</td>
+                    <td>{{book.return_date}}</td>
+                    <td><button @click="returnbook(book)">Return book</button></td>
                 </tr>
 
             </table>
@@ -90,6 +94,10 @@
         methods: {
             create() {
                 this.$store.dispatch('addbook',this.form);
+            },
+            returnbook(book)
+            {
+                this.$store.dispatch('returnbook',book);
             }
         },
         mounted() {
