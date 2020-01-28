@@ -4,17 +4,13 @@
             <v-flex md12>
                 <p>Add a permission</p>
                 <v-form v-model="valid" ref="form">
-                    <v-text-field label="Book Name" v-model="form.name" :rules="nameRules" :counter="10"  color="purple darken-2" > </v-text-field>
+                    <v-text-field label="Book Name" v-model="form.name" :rules="nameRules" :counter="20"  color="purple darken-2" > </v-text-field>
                     <v-text-field label="Book category" v-model="form.category" :rules="categoryRules" :counter="10"  color="purple darken-2" > </v-text-field>
                     <v-text-field label="Release year" v-model="form.year" :rules="yearRules" :counter="10"  color="purple darken-2" > </v-text-field>
-                    <v-text-field label="Image url" v-model="form.url" :rules="urlRules" :counter="10"  color="purple darken-2" > </v-text-field>
+                    <v-text-field label="Book author" v-model="form.author" :rules="authorRules" :counter="10"  color="purple darken-2" > </v-text-field>
+                    <v-textarea label="Book description" v-model="form.description" :rules="urlRules" :counter="200"  color="purple darken-2" > </v-textarea>
                     <v-btn @click="create" :class="{ red: !valid, blue: valid }">Add book </v-btn>
                 </v-form>
-            </v-flex>
-        </v-layout>
-        <v-layout row>
-            <v-flex md12>
-                <v-data-table></v-data-table>
             </v-flex>
         </v-layout>
         <v-layout row>
@@ -44,6 +40,19 @@
 
             </table>
         </v-layout>
+
+        <v-card>
+            <v-card-title>
+                <h5>Add a new book to the library</h5>
+            </v-card-title>
+            <v-card-text>
+               <v-form class="px-3">
+                    <v-text-field label="Title" prepend-icon="edit">
+
+                    </v-text-field>
+               </v-form>
+            </v-card-text>
+        </v-card>
     </v-container>
 </template>
 
@@ -64,29 +73,33 @@
                 valid: false,
                 valid_one: false,
                 nameRules: [
-                    (v) => !!v || 'A permission is required',
-                    (v) => v && v.length <= 10 || 'Permission must be less than 2 characters'
+                    (v) => !!v || 'A name is required',
+                    (v) => v && v.length <= 20 || 'Name must be less than 10 characters'
                 ],
                 categoryRules: [
-                    (v) => !!v || 'A role is required',
-                    (v) => v && v.length <= 10 || 'Role must be less than 2 characters'
+                    (v) => !!v || 'A category is required',
+                    (v) => v && v.length <= 10 || 'Category must be less than 10 characters'
                 ],
                 yearRules: [
-                    (v) => !!v || 'A role is required',
-                    (v) => v && v.length <= 10 || 'Role must be less than 2 characters'
+                    (v) => !!v || 'A year is required',
+                    (v) => v && v.length <= 10 || 'Year must be less than 10 characters'
+                ],
+                authorRules: [
+                    (v) => !!v || 'An author is required',
+                    (v) => v && v.length <= 10 || 'Author must be less than 10 characters'
                 ],
                 urlRules: [
-                    (v) => !!v || 'A role is required',
-                    (v) => v && v.length <= 10 || 'Role must be less than 2 characters'
+                    (v) => !!v || 'A description is required',
+                    (v) => v && v.length <= 200 || 'Description must be less than 100 characters'
                 ],
             }
         },
         computed: {
             ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg','getallorderednreserved']),
             selectErrors () {
-                const errors = []
-                if (!this.$v.select.$dirty) return errors
-                !this.$v.select.required && errors.push('Item is required')
+                const errors = [];
+                if (!this.$v.select.$dirty) return errors;
+                !this.$v.select.required && errors.push('Item is required');
                 return errors
             },
 

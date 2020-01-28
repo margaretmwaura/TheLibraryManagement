@@ -2,9 +2,7 @@
     <div class="text-center">
         <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
-                <v-btn color="red lighten-2" dark v-on="on">
-                    Change role
-                </v-btn>
+                <v-btn class="ma-2" outlined color="indigo" dark v-on="on">Change role</v-btn>
             </template>
                <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>

@@ -13,7 +13,7 @@ const routes = [
     {
         name : 'Add',
         path: '/add',
-        component: Add_book,
+        component: Dashboard,
 
     },
     {
