@@ -281,9 +281,10 @@ export default new Vuex.Store({
             axios
                 .post('/returnbook',data)
                 .then(response => {
+                    var code = response.status;
                     if(code === 200)
                     {
-
+                        this.state.allorderednreserved = response.data;
                     }
                 })
                 .catch(error =>

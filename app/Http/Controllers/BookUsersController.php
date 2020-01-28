@@ -91,6 +91,8 @@ class BookUsersController extends Controller
     {
         $bookname = $request->input("name");
         $useremail = $request->input("email");
+        $due_date = $request->input("due_date");
+        Log::info("This is the due date associated with the book " . $due_date);
         Log::info("This is the entire request " , $request->all());
         Log::info("User has returned the book which is " . $bookname . " and its id is ");
 
@@ -110,9 +112,16 @@ class BookUsersController extends Controller
         $user = User::find($user->id);
         $id = $user->id;
         Log::info("This is the id of the user " . $id);
-//        $book->users()->sync($id);
 
-        $book->users()->updateExistingPivot($id, array('return_date' => Carbon::now()), false);
+        try{
+            $book->users()->wherePivot('due_date', $due_date)->updateExistingPivot($id, array('return_date' => Carbon::now()), false);
+            $bookcollection =  $data = DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();;
+            return response()->json($bookcollection);
+        }
+       catch (\Exception $e)
+       {
+           Log::info("There was an erro while updating");
+       }
     }
     public function getBooks()
     {

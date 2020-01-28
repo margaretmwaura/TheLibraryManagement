@@ -42,8 +42,8 @@
                 </v-flex>
                 <v-flex xs6 sm2 md2>
                     <div>Action</div>
-                    <div>
-                        <v-chip :class="`${checkBookStatus(book.borrow_date)}`" @click="returnbook(book)">{{checkActionToTake(book.borrow_date)}}</v-chip>
+                    <div v-if="checkIfReturnIsThere(book.return_date)">
+                        <v-chip :class="`${checkBookStatus(book.borrow_date)}`" @click="returnbook(book)" >{{checkActionToTake(book.borrow_date)}}</v-chip>
                     </div>
                 </v-flex>
             </v-layout>
@@ -136,6 +136,17 @@
                 else
                 {
                     return "Collect"
+                }
+            },
+            checkIfReturnIsThere(return_date)
+            {
+                if(return_date === null)
+                {
+                    return true
+                }
+                else
+                {
+                    return false
                 }
             }
 
