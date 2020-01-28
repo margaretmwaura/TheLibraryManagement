@@ -15,6 +15,7 @@ class BookUsersController extends Controller
     //Instead of sending out two objects , the user we will be getting is the current user
     public function orderBook(Request $request)
     {
+        Log::info($request->all());
         Log::info("ordering a book " . $request->input("id"));
         Log::info("Currently logged in user " . Auth::user()->id);
         $id = $request->input("id");
@@ -27,9 +28,12 @@ class BookUsersController extends Controller
         $book = Book::find($id);
         $book->borrow_date=$current;
         $book->due_date=$trialExpires;
+        $name = $book->name;
 
+        //Changing status
+        $book->status_id=2;
         $book->save();
-        $book->users()->attach($user_id,['due_date' => Carbon::now(),'order_date' => $trialExpires,'email'=>$email]);
+        $book->users()->attach($user_id,['due_date' => $trialExpires,'order_date' => Carbon::now(),'email'=>$email,'name'=>$name]);
     }
     public function reservebook(Request $request)
     {
@@ -41,28 +45,16 @@ class BookUsersController extends Controller
 
 
         $book = Book::find($id);
+        $name = $book->name;
+        $book->status_id=3;
         $book->reserve_date=Carbon::now();
         $book->save();
-        $book->users()->attach($user_id,['borrow_date' => Carbon::now(),'email'=>$email]);
+        $book->users()->attach($user_id,['borrow_date' => Carbon::now(),'email'=>$email,'name'=>$name]);
     }
     public function getAllBooks()
     {
-        $users = User::all();
-        $bookcollection = collect([]);
-        try{
-            $users->each(function ($item, $key) use ($bookcollection) {
-
-                Log::info($item->id);
-                Log::info($item->books->pluck('name'));
-                $bookcollection->push($item->books);
-                Log::info($bookcollection);
-
-            });
-        }
-        catch (\Exception $e)
-        {
-            Log::info("The reasons for not getting the collection " . $e->getMessage());
-        }
+//        $users = User::all();
+        $bookcollection =  $data = DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();;
         return response()->json($bookcollection);
     }
     public function sendingemails()

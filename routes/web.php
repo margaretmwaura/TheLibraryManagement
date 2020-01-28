@@ -12,7 +12,7 @@
 */
 
 Route::get('/admin', function () {
-    return view('welcome');
+    return view('home');
 })->middleware('Admin');
 
 Auth::routes();

@@ -2,7 +2,7 @@
     <v-container>
         <v-layout row>
             <v-flex md12>
-                <p>Add a permission</p>
+                <p>Add a Book</p>
                 <v-form v-model="valid" ref="form">
                     <v-text-field label="Book Name" v-model="form.name" :rules="nameRules" :counter="20"  color="purple darken-2" > </v-text-field>
                     <v-text-field label="Book category" v-model="form.category" :rules="categoryRules" :counter="10"  color="purple darken-2" > </v-text-field>
@@ -13,45 +13,40 @@
                 </v-form>
             </v-flex>
         </v-layout>
-        <v-layout row>
-            <table class="table" v-for="books in getallorderednreserved">
-                <tr>
-                    <th>Book name</th>
-                    <th> Book Category </th>
-                    <th> Book Release year </th>
-                    <th> Book Borrow Date </th>
-                    <th>Book Due Date</th>
-                    <th>Book Reserve date</th>
-                    <th>Assoicated User </th>
-                    <th>Return date</th>
-                    <th>Return book</th>
-                </tr>
-                <tr v-for="book in books">
-                    <td>{{book.name}}</td>
-                    <td>{{book.category}}</td>
-                    <td>{{book.year}}</td>
-                    <td>{{book.borrow_date}}</td>
-                    <td>{{book.due_date}}</td>
-                    <td>{{book.reserve_date}}</td>
-                    <td>{{book.pivot.email}}</td>
-                    <td>{{book.return_date}}</td>
-                    <td><button @click="returnbook(book)">Return book</button></td>
-                </tr>
 
-            </table>
-        </v-layout>
-
-        <v-card>
-            <v-card-title>
-                <h5>Add a new book to the library</h5>
-            </v-card-title>
-            <v-card-text>
-               <v-form class="px-3">
-                    <v-text-field label="Title" prepend-icon="edit">
-
-                    </v-text-field>
-               </v-form>
-            </v-card-text>
+        <v-card class="pa-5" v-for="book in getallorderednreserved" :key="book.id">
+            <v-layout row :class="`${checkBookStatus(book.borrow_date)}`">
+                <v-flex xs12 md12 >
+                    <div class="caption grey--text">Book Name</div>
+                    <div>{{book.name}}</div>
+                </v-flex>
+                <v-flex xs6 sm2 md2>
+                    <div class="cption grey--text">Book Reserve Date</div>
+                    <div>{{book.borrow_date}}</div>
+                </v-flex>
+                <v-flex xs6 sm2 md2>
+                    <div class="caption grey--text">Book Due Date</div>
+                    <div>{{book.due_date}}</div>
+                </v-flex>
+                <v-flex xs6 sm2 md2>
+                    <div class="caption grey--text">Book Borrow Date</div>
+                    <div>{{book.order_date}}</div>
+                </v-flex>
+                <v-flex xs6 sm2 md2>
+                    <div class="caption grey--text">Book Email</div>
+                    <div>{{book.email}}</div>
+                </v-flex>
+                <v-flex xs6 sm2 md2>
+                    <div class="caption grey--text">Book Return Date</div>
+                    <div>{{book.return_date}}</div>
+                </v-flex>
+                <v-flex xs6 sm2 md2>
+                    <div>Action</div>
+                    <div>
+                        <v-chip :class="`${checkBookStatus(book.borrow_date)}`">{{checkActionToTake(book.borrow_date)}}</v-chip>
+                    </div>
+                </v-flex>
+            </v-layout>
         </v-card>
     </v-container>
 </template>
@@ -60,8 +55,9 @@
     import { validationMixin } from 'vuelidate'
     import {mapGetters} from "vuex";
     import { required, maxLength, email } from 'vuelidate/lib/validators'
+    import notificationmixin from "../mixins/notificationmixin";
     export default {
-        mixins: [validationMixin],
+        mixins: [validationMixin,notificationmixin],
         validations: {
             select: { required },
         },
@@ -106,19 +102,72 @@
         },
         methods: {
             create() {
-                this.$store.dispatch('addbook',this.form);
+                if(this.valid)
+                {
+                    this.$store.dispatch('addbook',this.form);
+                }
+                else
+                {
+                    this.informwithnotification("Fail" , "Ensure you fill all details");
+                }
+
             },
             returnbook(book)
             {
                 this.$store.dispatch('returnbook',book);
+            },
+            checkBookStatus(orderdate){
+
+                if(orderdate === null)
+                {
+                    return "borrowed"
+                }
+                else
+                {
+                    return "ordered"
+                }
+            },
+            checkActionToTake(orderdate)
+            {
+                if(orderdate === null)
+                {
+                    return "Return"
+                }
+                else
+                {
+                    return "Collect"
+                }
             }
+
         },
+
         mounted() {
             this.$store.dispatch('getallorderedandreservedbooks');
         },
+
+        watch: {
+            '$store.state.addfail' : function () {
+                console.log("The adding was a fail");
+                this.informwithnotification("Fail" , "You have not added a book");
+                this.$store.dispatch('clearAddFail');
+            },
+            '$store.state.addsuccess' : function () {
+                console.log("The adding was successful");
+                this.informwithnotification("Sucesss" , "You have  added a book");
+                this.$store.dispatch('clearAddSuccess');
+            },
+        },
+
     }
 </script>
 
 <style scoped>
-
+    .borrowed
+    {
+        border-left: 4px solid orange;
+    }
+    .ordered
+    {
+        border-left: 4px solid tomato;
+    }
 </style>

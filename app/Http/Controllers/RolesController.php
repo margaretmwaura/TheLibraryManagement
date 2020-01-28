@@ -25,11 +25,9 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         Log::info("This is the request " . $request);
-        $this->roleRepository->storeRecord($request->all());
+        $roles = $this->roleRepository->storeRecord($request->all());
+        return response()->json($roles);
 
-        return response()->json([
-            'status'=>true
-        ]);
     }
 
     public function update(Request $request, $id)

@@ -5,6 +5,7 @@
         <router-view>
 
         </router-view>
+        <notifications group="foo" />
     </v-content>
 </v-app>
 </template>

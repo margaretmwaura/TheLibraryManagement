@@ -22,11 +22,11 @@
             <v-flex md12>
                 <h6 style="text-align: center">Add a role to a permission</h6>
                 <form>
-                    <v-select v-model="formAssign.role" :items="getallRolesg"  :error-messages="selectErrors" label="Item"
+                    <v-autocomplete v-model="formAssign.role" :items="getallRolesg"  label="Role"
                               required>
-                    </v-select>
-                    <v-select v-model="formAssign.permission" :items="getallPermissions"  :error-messages="selectErrors" label="Item"
-                    > </v-select>
+                    </v-autocomplete>
+                    <v-autocomplete v-model="formAssign.permission" :items="getallPermissions"  label="Permission"
+                    > </v-autocomplete>
                     <v-btn class="mr-4" @click="assign">submit</v-btn>
                 </form>
             </v-flex>
@@ -34,17 +34,15 @@
 
         <v-layout row justify-center>
 
-                 <v-flex md3>
-                    <v-card-title>The following are roles  -> </v-card-title>
+                 <v-flex md2>
                     <div v-for="role in getallRolesg">
-                        <v-card-text>{{role}}</v-card-text>
+                        <p>{{role}}</p>
                     </div>
                  </v-flex>
                 <v-flex md5>
-                    <v-card-title>The following are the permissions of the role</v-card-title>
                     <div v-for="perm in getallpermsroles">
                         <div v-for="one in perm" style="display: inline-block; margin-right: 30px">
-                            <v-card-text>{{one}}</v-card-text>
+                            <p>{{one}}</p>
                         </div>
                     </div>
                 </v-flex>
@@ -68,9 +66,9 @@
                     <v-flex xs6 sm4 md2>
                         <div class="caption grey--text">Change Status</div>
                         <div>
-                            <!--                        <v-chip small :class="`${roleidname(user.role_id)} white&#45;&#45;text caption my-2`">-->
-                            <!--                        Change role status-->
-                            <!--                       </v-chip>-->
+<!--                                                    <v-chip small :class="`${roleidname(user.role_id)} white&#45;&#45;text caption my-2`">-->
+<!--                                                    Change role status-->
+<!--                                                   </v-chip>-->
                             <popup :user="user"></popup>
                         </div>
                     </v-flex>
@@ -86,9 +84,10 @@
     import { validationMixin } from 'vuelidate'
     import { required, maxLength, email } from 'vuelidate/lib/validators'
     import {mapGetters} from "vuex";
+    import notificationmixin from "../mixins/notificationmixin";
     export default {
         components: {Popup},
-        mixins: [validationMixin],
+        mixins: [validationMixin,notificationmixin],
         validations: {
             select: { required },
         },
@@ -111,6 +110,8 @@
                 forma:{},
                 formAssign:{},
                 formChange:{},
+                Role:"Pick a new role",
+                Permissions:"Pick a permission"
 
             }
         },
@@ -119,19 +120,33 @@
             selectErrors () {
                 const errors = [];
                 if (!this.$v.select.$dirty) return errors
-                !this.$v.select.required && errors.push('Item is required')
+                !this.$v.select.required && errors.push('Item is required');
                 return errors
             },
         },
         methods: {
             addPermission()
             {
-                console.log("Adding permissions");
-                this.$store.dispatch('addPermission',this.form);
+                if(this.valid)
+                {
+                    this.$store.dispatch('addPermission',this.form);
+                }
+                else
+                {
+                    this.informwithnotification("Ensure you add all the details");
+                }
+
             },
-            addRole() {
-                console.log("Adding roles");
-                this.$store.dispatch('addRole',this.forma);
+            addRole()
+            {
+                if(this.valid_one)
+                {
+                    this.$store.dispatch('addRole',this.forma);
+                }
+                else
+                {
+                    this.informwithnotification("Ensure you add all the details");
+                }
             },
             assign()
             {
@@ -169,6 +184,29 @@
             this.$store.dispatch('getallPermissions');
             this.$store.dispatch('getAllUsers');
         },
+        watch: {
+            '$store.state.addrolesuccess' : function () {
+
+                this.informwithnotification("Success" , "You have to add a role");
+                this.$store.dispatch('clearAddRoleSuccess');
+            },
+            '$store.state.addrolefail' : function () {
+
+                this.informwithnotification("Fail" , "You have not managed to add a role");
+                this.$store.dispatch('addrolefail');
+            },
+            '$store.state.addpermsuccess' : function () {
+
+                this.informwithnotification("Success" , "You have to add a permission");
+                this.$store.dispatch('clearAddPermSuccess');
+            },
+            '$store.state.addpermfail' : function () {
+
+                this.informwithnotification("Fail" , "You have not managed to add a permission");
+                this.$store.dispatch('clearAddPermFail');
+            }
+        },
+
     }
 </script>
 

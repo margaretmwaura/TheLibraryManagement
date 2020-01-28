@@ -23,10 +23,8 @@ class PermissionsController extends Controller
     public function store(Request $request)
     {
         Log::info("This is the request " . $request);
-        $this->permissionRepository->storeRecord($request->all());
-        return response()->json([
-            'status'=>true
-        ]);
+       $perms =  $this->permissionRepository->storeRecord($request->all());
+        return response()->json($perms);
     }
     public function update(Request $request, $id)
     {

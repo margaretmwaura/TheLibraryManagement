@@ -26,11 +26,8 @@ class BooksController extends Controller
     {
 
         Log::info("This is the request " . $request);
-        $this->bookRepository->storeRecord($request->all());
-
-        return response()->json([
-            'status'=>true
-        ]);
+       $books =  $this->bookRepository->storeRecord($request->all());
+        return response()->json($books);
     }
 
     public function update(Request $request, $id)
@@ -41,6 +38,7 @@ class BooksController extends Controller
 
     public function destroy($id)
     {
-        $this->bookRepository->deleteRecord($id);
+        $books = $this->bookRepository->deleteRecord($id);
+        return response()->json($books);
     }
 }

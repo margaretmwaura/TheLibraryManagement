@@ -20,13 +20,13 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="deleting(book.id)"  v-if="$can('Order')">Delete</v-btn>
+                    <v-btn v-on:click="deleting(book.id)"  v-if="$candelete('Order',book.status_id)">Delete</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="editting(book)"  v-if="$can('Order')">Edit </v-btn>
+                    <v-btn v-on:click="editting(book)"  v-if="$canedit('Order',book.status_id)">Edit </v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="reserveBook(book)" v-if="$can('Order')">Reserve </v-btn>
+                        <v-btn v-on:click="reserveBook(book)" v-if="$canreserve('Order',book.status_id)">Reserve </v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn  v-on:click="orderBook(book)" v-if="$can('Order')">Borrow </v-btn>
+                        <v-btn  v-on:click="orderBook(book)" v-if="$canborrow('Order',book.status_id)">Borrow </v-btn>
                     <v-spacer></v-spacer>
                     <v-divider></v-divider>
                     <v-btn color="primary" text @click="togglingPermissions">
@@ -84,9 +84,32 @@
             },
             reserveBook(book)
             {
+                console.log("A book has been reserved");
                 this.$store.dispatch('reserveBook',book);
                 this.dialog = false;
             },
+            show_reserve(id)
+            {
+                if(id === 2)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false
+                }
+            },
+            show_borrow(id)
+            {
+                if(id === 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false
+                }
+            }
         }
     }
 </script>

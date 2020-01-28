@@ -11,7 +11,21 @@ export default new Vuex.Store({
         permsroles:[],
         allUsers:[],
         allorderednreserved:[],
-        bookscount:0
+        bookscount:0,
+
+        // The below variables hold the values that show the status of the result
+        ordersuccess:'',
+        orderfail:'',
+        reservesuccess:'',
+        reservefail:'',
+        deletesuccess:'',
+        deletefail:'',
+        addfail:'',
+        addsuccess:'',
+        addrolesuccess:'',
+        addrolefail:'',
+        addpermfail:'',
+        addpermsuccess:''
     },
     mutations: {
         setPermissionmut(permission)
@@ -24,14 +38,17 @@ export default new Vuex.Store({
             axios
                 .post('/books',data)
                 .then(response => {
+                    this.state.books = response.data;
                     var code = response.status;
                     if(code === 200)
                     {
-
+                      this.state.addsuccess = "Sucess"
                     }
+
                 })
                 .catch(error =>
                 {
+                    this.state.addfail="Fail"
                 })
         },
         addPermissionmut(state,data)
@@ -43,11 +60,17 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
-
+                        this.state.permissions = response.data;
+                       this.state.addpermsuccess = "success"
+                    }
+                    else
+                    {
+                        this.state.addpermfail = "fail"
                     }
                 })
                 .catch(error =>
                 {
+                    this.state.addpermfail = "fail"
                 })
         },
         addRolemut(state,data)
@@ -56,13 +79,21 @@ export default new Vuex.Store({
             axios
                 .post('/roles',data)
                 .then(response => {
+                    var code = response.status;
                     if(code === 200)
                     {
-
+                        this.state.roles = response.data;
+                        console.log("This is the data " + response.data);
+                      this.state.addrolesuccess = "Success"
+                    }
+                    else
+                    {
+                        this.state.addrolefail = "Failed"
                     }
                 })
                 .catch(error =>
                 {
+                    this.state.addrolesuccess = "Success"
                 })
         },
         getallbooksmut()
@@ -139,12 +170,17 @@ export default new Vuex.Store({
                     const code = response.status;
                     if(code === 200)
                     {
-
+                        this.state.books = response.data;
+                         this.state.deletesuccess = "Sucess"
+                    }
+                    else
+                    {
+                        this.state.deletefail = "Failed"
                     }
                 })
                 .catch(error =>
                 {
-
+                    this.state.deletefail = "Failed"
                 })
         },
         toggleRolesMut(state , user)
@@ -153,9 +189,10 @@ export default new Vuex.Store({
             axios
                 .post('/toggle',user)
                 .then(response => {
+                    const code = response.status;
                     if(code === 200)
                     {
-
+                        this.state.allUsers = response.data;
                     }
                 })
                 .catch(error =>
@@ -167,13 +204,20 @@ export default new Vuex.Store({
             axios
                 .post('/orderbook',book)
                 .then(response => {
+                    var code = response.status;
                     if(code === 200)
                     {
-
+                        this.state.books = response.data;
+                        this.state.ordersuccess = "Successful"
+                    }
+                    else
+                    {
+                        this.state.orderfail = "Fail"
                     }
                 })
                 .catch(error =>
                 {
+                    this.state.orderfail = "Fail"
                 })
         },
         reserveBookmut(state,book)
@@ -181,13 +225,19 @@ export default new Vuex.Store({
             axios
                 .post('/reservebook',book)
                 .then(response => {
+                    var code = response.status;
                     if(code === 200)
                     {
-
+                       this.state.reservesuccess = "Success"
+                    }
+                    else
+                    {
+                        this.state.reservefail = "Fail"
                     }
                 })
                 .catch(error =>
                 {
+                    this.state.reservefail = "Fail"
                 })
         },
         getallorderedandreservedbooksmut()
@@ -247,6 +297,54 @@ export default new Vuex.Store({
                 .catch(error =>
                 {
                 })
+        },
+        clearOrderFailMut()
+        {
+            this.state.orderfail = " "
+        },
+        clearOrderSuccessMut()
+        {
+            this.state.ordersuccess = " "
+        },
+        clearReserveFailMut()
+        {
+            this.state.reservefail = " "
+        },
+        clearReserveSuccessMut()
+        {
+            this.state.reservesuccess = " "
+        },
+        clearDeleteFailMut()
+        {
+            this.state.deletefail = " "
+        },
+        clearDeleteSuccessMut()
+        {
+            this.state.deletesuccess = " "
+        },
+        clearAddSuccessMut()
+        {
+            this.state.addsuccess = " "
+        },
+        clearAddFailMut()
+        {
+            this.state.addfail = " "
+        },
+        clearAddRoleSuccessMut()
+        {
+            this.state.addrolesuccess= " "
+        },
+        clearAddRoleFailMut()
+        {
+            this.state.addrolefail = " "
+        },
+        clearAddPermSuccessMut()
+        {
+            this.state.addpermsuccess= " "
+        },
+        clearAddPermFailMut()
+        {
+            this.state.addpermfail = " "
         }
 
         },
@@ -354,7 +452,56 @@ export default new Vuex.Store({
             getallusersbooks(state)
             {
                 state.commit("getallusersbooksmut")
+            },
+            clearOrderFail(state)
+            {
+                state.commit("clearOrderFailMut")
+            },
+            clearOrderSuccess(state)
+            {
+                state.commit("clearOrderSuccessMut")
+            },
+            clearReserveFail(state)
+            {
+                state.commit("clearReserveFailMut")
+            },
+            clearReserveSuccess(state)
+            {
+                state.commit("clearReserveSuccessMut")
+            },
+            clearDeleteFail(state)
+            {
+                state.commit("clearDeleteFailMut")
+            },
+            clearDeleteSuccess(state)
+            {
+                state.commit("clearDeleteSuccessMut")
+            },
+            clearAddSuccess(state)
+            {
+                state.commit("clearAddSuccessMut")
+            },
+            clearAddFail(state)
+            {
+                state.commit("clearAddFailMut")
+            },
+            clearAddRoleSuccess(state)
+            {
+                state.commit("clearAddRoleSuccessMut");
+            },
+            clearAddRoleFailMut(state)
+            {
+                state.commit("clearAddRoleFailMut");
+            },
+            clearAddPermSuccess(state)
+            {
+                state.commit("clearAddPermSuccessMut")
+            },
+            clearAddPermFail(state)
+            {
+               state.commit("clearAddPermFailMut")
             }
+
         },
 
 

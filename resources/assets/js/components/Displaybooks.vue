@@ -1,10 +1,12 @@
 
         <template>
             <v-container fluid>
-                <v-data-iterator :items="getBooks" :items-per-page.sync="itemsPerPage" hide-default-footer>
+                <v-data-iterator :items="getBooks"  hide-default-footer>
+
+
                     <template v-slot:header>
                         <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
-                            <v-toolbar-title>This is a header</v-toolbar-title>
+                            <v-toolbar-title>Below are all the books listed in the cytonn library</v-toolbar-title>
                         </v-toolbar>
                     </template>
 
@@ -44,34 +46,6 @@
                         </v-row>
                     </template>
 
-                    <template v-slot:footer>
-                        <v-row class="mt-2" align="center" justify="center">
-                            <span class="grey--text">Items per page</span>
-                            <v-menu offset-y>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn dark text color="primary" class="ml-2" v-on="on">
-                                        {{ itemsPerPage }}
-                                        <v-icon>mdi-chevron-down</v-icon>
-                                    </v-btn>
-                                </template>
-                                <v-list>
-                                    <v-list-item v-for="(number, index) in itemsPerPageArray" :key="index" @click="updateItemsPerPage(number)">
-                                        <v-list-item-title>{{ number }}</v-list-item-title>
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
-
-                            <v-spacer></v-spacer>
-
-                            <span class="mr-4 grey--text">Page {{ page }} of {{ numberOfPages }}</span>
-                            <v-btn fab dark color="blue darken-3" class="mr-1" @click="formerPage">
-                                <v-icon>mdi-chevron-left</v-icon>
-                            </v-btn>
-                            <v-btn fab dark color="blue darken-3" class="ml-1" @click="nextPage">
-                                <v-icon>mdi-chevron-right</v-icon>
-                            </v-btn>
-                        </v-row>
-                    </template>
                 </v-data-iterator>
             </v-container>
         </template>
@@ -79,6 +53,7 @@
 <script>
     import {mapGetters} from "vuex";
     import Moreinfo from "./Moreinfo";
+    import notificationmixin from "../mixins/notificationmixin";
 
     export default {
         name: "displaybooks",
@@ -121,7 +96,40 @@
                 page: 1,
                 itemsPerPage: 3,
             }
-        }
+        },
+        watch: {
+            '$store.state.ordersuccess' : function () {
+                console.log("The ordering was a success");
+                this.informwithnotification("Success" , "You have borrowed a book");
+                this.$store.dispatch('clearOrderSuccess');
+            },
+            '$store.state.orderfail' : function () {
+                console.log("The ordering was failed");
+                this.informwithnotification("Fail" , "You have not managed to borrow a book");
+                this.$store.dispatch('clearOrderFail');
+            },
+            '$store.state.reservesuccess' : function () {
+                console.log("The ordering was a success");
+                this.informwithnotification("Success" , "You have reserved a book");
+                this.$store.dispatch('clearReserveSuccess');
+            },
+            '$store.state.reservefail' : function () {
+                console.log("The ordering was failed");
+                this.informwithnotification("Fail" , "You have not managed to reserve a book");
+                this.$store.dispatch('clearReserveFail');
+            },
+            '$store.state.deletesuccess' : function () {
+                console.log("The ordering was a success");
+                this.informwithnotification("Success" , "You have delete a book");
+                this.$store.dispatch('clearDeleteSuccess');
+            },
+            '$store.state.deletefail' : function () {
+                console.log("The ordering was failed");
+                this.informwithnotification("Fail" , "You have not managed to deleted a book");
+                this.$store.dispatch('clearDeleteFail');
+            }
+        },
+        mixins: [notificationmixin],
     }
 </script>
 

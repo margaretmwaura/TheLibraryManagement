@@ -19,7 +19,8 @@ class PermissionRepository implements PermissionRepositoryInterface
 
     public function storeRecord($input)
     {
-        return Permission::create($input);
+        Permission::create($input);
+        return Permission::all()->pluck('name');
 
     }
 

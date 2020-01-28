@@ -4,7 +4,7 @@ import store from "./appstore/store";
 window.Vue = require('vue');
 import Permissions from './mixins/Permissions';
 import router from "./approuters/router";
-
+import Notifications from 'vue-notification'
 
 import Vuetify from 'vuetify'
 Vue.use(Vuetify);
@@ -15,6 +15,7 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 
 Vue.use(VueMaterial);
+Vue.use(Notifications);
 Vue.mixin(Permissions);
 
 const app = new Vue({

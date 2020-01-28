@@ -72,5 +72,9 @@ class RolesPermissionController extends Controller
             $user->role_id=11;
             $user->save();
         }
+
+
+        $users = User::all();
+        return response()->json($users);
     }
 }

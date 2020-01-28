@@ -1,10 +1,53 @@
 <script>
     export default {
         methods: {
-            $can(permissionName) {
+            $canedit(permissionName,status) {
                 console.log("The permisions granted are in mixins " , window.perm);
+                console.log("This is the status of the book " , status);
                 console.log("Thses is the permission we have been given " , permissionName);
-                return window.perm.indexOf(permissionName) !== -1;
+                let permstat =  window.perm.indexOf(permissionName) !== -1;
+                console.log("This is the status of the availability of the permission " , permstat)
+
+                if(permstat === true && status === 1)
+                {
+                    return true
+                }
+            },
+            $candelete(permissionName,status) {
+                console.log("The permisions granted are in mixins " , window.perm);
+                console.log("This is the status of the book " , status);
+                console.log("Thses is the permission we have been given " , permissionName);
+                let permstat =  window.perm.indexOf(permissionName) !== -1;
+                console.log("This is the status of the availability of the permission " , permstat)
+
+                if(permstat === true && status === 1)
+                {
+                    return true
+                }
+            },
+            $canborrow(permissionName,status) {
+                console.log("The permisions granted are in mixins " , window.perm);
+                console.log("This is the status of the book " , status);
+                console.log("Thses is the permission we have been given " , permissionName);
+                let permstat =  window.perm.indexOf(permissionName) !== -1;
+                console.log("This is the status of the availability of the permission " , permstat)
+
+                if(permstat === true && status === 1)
+                {
+                    return true
+                }
+            },
+            $canreserve(permissionName,status) {
+                console.log("The permisions granted are in mixins " , window.perm);
+                console.log("This is the status of the book " , status);
+                console.log("Thses is the permission we have been given " , permissionName);
+                let permstat =  window.perm.indexOf(permissionName) !== -1;
+                console.log("This is the status of the availability of the permission " , permstat)
+
+                if(permstat === true && status === 2)
+                {
+                    return true
+                }
             },
         },
     };
