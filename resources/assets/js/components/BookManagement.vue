@@ -43,7 +43,7 @@
                 <v-flex xs6 sm2 md2>
                     <div>Action</div>
                     <div>
-                        <v-chip :class="`${checkBookStatus(book.borrow_date)}`">{{checkActionToTake(book.borrow_date)}}</v-chip>
+                        <v-chip :class="`${checkBookStatus(book.borrow_date)}`" @click="returnbook(book)">{{checkActionToTake(book.borrow_date)}}</v-chip>
                     </div>
                 </v-flex>
             </v-layout>

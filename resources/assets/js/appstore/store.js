@@ -205,9 +205,12 @@ export default new Vuex.Store({
                 .post('/orderbook',book)
                 .then(response => {
                     var code = response.status;
+                    this.state.books = response.data;
                     if(code === 200)
                     {
-                        this.state.books = response.data;
+
+                        this.state.books = response.data.original;
+                        console.log("This is the response after order " , response.data.original);
                         this.state.ordersuccess = "Successful"
                     }
                     else
@@ -228,6 +231,8 @@ export default new Vuex.Store({
                     var code = response.status;
                     if(code === 200)
                     {
+                        this.state.books = response.data.original;
+                        console.log("This is the response after receive " , response.data.original);
                        this.state.reservesuccess = "Success"
                     }
                     else

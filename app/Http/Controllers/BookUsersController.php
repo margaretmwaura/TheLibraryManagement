@@ -34,6 +34,11 @@ class BookUsersController extends Controller
         $book->status_id=2;
         $book->save();
         $book->users()->attach($user_id,['due_date' => $trialExpires,'order_date' => Carbon::now(),'email'=>$email,'name'=>$name]);
+
+        //return books since sytax has changed
+        $books = app('App\Http\Controllers\BooksController')->index();
+        Log::info("This is the response after ordering a book " . $books);
+        return response()->json($books);
     }
     public function reservebook(Request $request)
     {
@@ -50,6 +55,11 @@ class BookUsersController extends Controller
         $book->reserve_date=Carbon::now();
         $book->save();
         $book->users()->attach($user_id,['borrow_date' => Carbon::now(),'email'=>$email,'name'=>$name]);
+
+        //return books since sytax has changed
+        $books = app('App\Http\Controllers\BooksController')->index();
+        Log::info("This is the response after reserving a book " . $books);
+        return response()->json($books);
     }
     public function getAllBooks()
     {
@@ -80,13 +90,29 @@ class BookUsersController extends Controller
     public function returnbook(Request $request)
     {
         $bookname = $request->input("name");
-        $bookid = $request->input("id");
-      Log::info("User has returned the book which is " . $bookname . " and its id is " . $bookid);
-      $book = Book::find($bookid);
-      $book->return_date= Carbon::now();
-      $book->save();
-      Log::info("We have tried updating the book");
+        $useremail = $request->input("email");
+        Log::info("This is the entire request " , $request->all());
+        Log::info("User has returned the book which is " . $bookname . " and its id is ");
 
+        $books = DB::table('books')->where('name', $bookname)->get();
+        $users = DB::table('users')->where('email',$useremail)->get();
+
+
+        Log::info("This is the email of user ". $useremail);
+
+        $book = $books[0];
+        $book = Book::find($book->id);
+        $book->return_date= Carbon::now();
+        $book->save();
+
+        Log::info("The id of the book is " . $book->id);
+        $user = $users[0];
+        $user = User::find($user->id);
+        $id = $user->id;
+        Log::info("This is the id of the user " . $id);
+//        $book->users()->sync($id);
+
+        $book->users()->updateExistingPivot($id, array('return_date' => Carbon::now()), false);
     }
     public function getBooks()
     {
