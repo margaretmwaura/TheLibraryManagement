@@ -13,7 +13,8 @@
 
 Route::get('/admin', function () {
     return view('home');
-})->middleware('Admin');
+});
+//    ->middleware('Admin');
 
 Auth::routes();
 
@@ -32,3 +33,5 @@ Route::get('/getallbooks','BookUsersController@getAllBooks');
 Route::post('/returnbook','BookUsersController@returnbook');
 Route::get('/bookscount','BookUsersController@getBooks');
 Route::get('/emailing','BookUsersController@sendingemails');
+Route::get('/rolenperms','RolesPermissionController@gettingallrolesnadpermissions');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

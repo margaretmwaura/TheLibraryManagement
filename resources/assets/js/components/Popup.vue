@@ -9,9 +9,10 @@
                     Privacy Policy
                 </v-card-title>
                 <v-card-text>
-                    <v-select v-model="formAssign.role" :items="getallRolesg"  label="Item"
+                    <p>Pick a role from the dropdown</p>
+                    <v-autocomplete v-model="formAssign.role" :items="getallRolesg"
                               required>
-                    </v-select>
+                    </v-autocomplete>
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
@@ -33,7 +34,8 @@
         {
             return{
                 dialog:false,
-                formAssign:{}
+                formAssign:{},
+
             }
         },
         computed: {

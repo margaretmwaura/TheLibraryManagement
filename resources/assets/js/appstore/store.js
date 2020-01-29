@@ -9,6 +9,7 @@ export default new Vuex.Store({
         permissions:[],
         roles:[],
         permsroles:[],
+        rolesnperms:[],
         allUsers:[],
         allorderednreserved:[],
         bookscount:0,
@@ -140,6 +141,16 @@ export default new Vuex.Store({
                 {
                 })
         },
+        getrolesnpermsmut()
+        {
+            axios.get('/rolenperms')
+                .then(response => {
+                    this.state.rolesnperms = response.data;
+                })
+                .catch(error =>
+                {
+                })
+        },
         getAllUsersmut()
         {
             axios.get('/users')
@@ -155,7 +166,7 @@ export default new Vuex.Store({
         {
             axios.post('/assign',data)
                 .then(response => {
-
+                    this.state.rolesnperms = response.data;
                 })
                 .catch(error =>
                 {
@@ -165,7 +176,7 @@ export default new Vuex.Store({
         {
             axios.post('/remove',data)
                 .then(response => {
-
+                    this.state.rolesnperms = response.data;
                 })
                 .catch(error =>
                 {
@@ -387,6 +398,9 @@ export default new Vuex.Store({
             },
             getbookscount:state => {
                 return state.bookscount;
+            },
+            getrolesnperms:state => {
+                return state.rolesnperms
             }
 
 
@@ -429,6 +443,10 @@ export default new Vuex.Store({
             getallRolesPermissions(state)
             {
                 state.commit('getallRolesPermissionsmut');
+            },
+            getrolesnperms(state)
+            {
+                state.commit('getrolesnpermsmut');
             },
             getAllUsers(state)
             {

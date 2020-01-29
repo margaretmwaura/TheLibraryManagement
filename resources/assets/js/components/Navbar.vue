@@ -9,11 +9,12 @@
             </v-toolbar-title>
             <v-spacer>
             </v-spacer>
-            <v-btn>
-                <Span>Sign out</Span>
-            </v-btn>
+           <a href="/logout"> Logout </a>
+            <a href="/login">Login </a>
+           <a href="/register">Register </a>
         </v-app-bar>
         <v-navigation-drawer temporary app class="indigo" v-model="drawer" >
+
             <v-list>
                 <v-list-item v-for="item in links" :key="item.title" router :to="item.route">
                     <v-list-item-icon>

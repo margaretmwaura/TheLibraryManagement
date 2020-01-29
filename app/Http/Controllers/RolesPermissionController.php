@@ -42,11 +42,14 @@ class RolesPermissionController extends Controller
        Log::info("The permissions gotten " . $permission[0] . " and the id is " . $id );
         try {
             $role[0]->permissions()->attach($id);
+            return $this->gettingallrolesnadpermissions();
         }
         catch (\Exception $e)
         {
             Log::info("The error while assinging roles " . $e->getMessage());
         }
+
+
     }
     public function detachingrolesandpermissions(Request $request)
     {
@@ -58,6 +61,7 @@ class RolesPermissionController extends Controller
         Log::info("The permissions gotten " . $permission[0] . " and the id is " . $id );
         try {
             $role[0]->permissions()->detach($id);
+            $this->gettingallrolesnadpermissions();
         }
         catch (\Exception $e)
         {
@@ -91,5 +95,10 @@ class RolesPermissionController extends Controller
 
         $users = User::all();
         return response()->json($users);
+    }
+    public function gettingallrolesnadpermissions()
+    {
+        $myvar = Role::with("permissions")->get();
+        echo $myvar;
     }
 }

@@ -22,9 +22,11 @@
             <v-flex md12>
                 <h6 style="text-align: center">Connect or disconnect roles and permissions </h6>
                 <form>
+                    <p>Pick a role below</p>
                     <v-autocomplete v-model="formAssign.role" :items="getallRolesg"  label="Role"
                               required>
                     </v-autocomplete>
+                    <p>Pick a permission below</p>
                     <v-autocomplete v-model="formAssign.permission" :items="getallPermissions"  label="Permission"
                     > </v-autocomplete>
                     <v-btn class="mr-4" @click="assign">Connect </v-btn>
@@ -33,24 +35,18 @@
             </v-flex>
         </v-layout>
 
-        <v-layout row justify-center>
+        <v-layout row >
 
-                 <v-flex md2>
-                    <div v-for="role in getallRolesg">
-                        <p>{{role}}</p>
+                 <v-flex>
+                    <div v-for="role in getrolesnperms">
+                        <p>The role <span style="color: indianred">{{role.name}}</span> has permissions</p>
+                           <div v-for="perm in role.permissions" style="display: inline-block ; margin-right:10px">
+                               <p> <span style="color : indigo"> {{perm.name}} </span></p>
+                           </div>
                     </div>
                  </v-flex>
-                <v-flex md5>
-                    <div v-for="perm in getallpermsroles">
-                        <div v-for="one in perm" style="display: inline-block; margin-right: 30px">
-                            <p>{{one}}</p>
-                        </div>
-                    </div>
-                </v-flex>
-
         </v-layout>
-
-            <v-card class="pa-5" v-for="user in getallUsersg" :key="user.id">
+        <v-card class="pa-5" v-for="user in getallUsersg" :key="user.id">
                 <v-layout row :class="`${roleidname(user.role_id)}`">
                     <v-flex xs12 md6 >
                         <div class="caption grey--text">Name of user</div>
@@ -75,8 +71,6 @@
                     </v-flex>
                 </v-layout>
             </v-card>
-
-
     </v-container>
 </template>
 
@@ -117,7 +111,7 @@
             }
         },
         computed: {
-            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg']),
+            ...mapGetters(['getallPermissions','getallRolesg','getallpermsroles','getallUsersg','getrolesnperms']),
             selectErrors () {
                 const errors = [];
                 if (!this.$v.select.$dirty) return errors
@@ -189,6 +183,7 @@
             this.$store.dispatch('getallRoles');
             this.$store.dispatch('getallPermissions');
             this.$store.dispatch('getAllUsers');
+            this.$store.dispatch('getrolesnperms');
         },
         watch: {
             '$store.state.addrolesuccess' : function () {
@@ -210,7 +205,7 @@
 
                 this.informwithnotification("Fail" , "You have not managed to add a permission");
                 this.$store.dispatch('clearAddPermFail');
-            }
+            },
         },
 
     }
