@@ -8,7 +8,6 @@
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
                   {{book.name}}
-                    {{getbookscount}}
                 </v-card-title>
                 <v-card-text>
                   {{book.description}}
@@ -18,6 +17,14 @@
                 </v-card-text>
                 <v-card-text>
                    Category :  {{book.category}}
+                </v-card-text>
+                <v-card-text>
+                    <div v-if="checkRemainingBooks(getbookscount)">
+                        You have borrowed a total of {{getbookscount}} , the remaining borrow count is {{borrowcount(getbookscount)}}
+                    </div>
+                    <div v-else>
+                        You cannot borrow more books you have exceeded 3 books
+                    </div>
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
@@ -133,7 +140,12 @@
                 }
 
 
-                }
+                },
+            borrowcount(count)
+            {
+                let remain = 3 - count;
+                return remain;
+            }
         }
     }
 </script>

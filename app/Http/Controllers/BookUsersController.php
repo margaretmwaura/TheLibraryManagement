@@ -119,15 +119,22 @@ class BookUsersController extends Controller
             $id = $user->id;
             // get an email for a user who had ordered the book
             $books = DB::table('book_user')->where('name', $bookname)->whereNotNull("borrow_date")->get();
-            Log::info("These are the books I have gotten from query". $books);
-            $book = $books[0];
-            Log::info("This is the id of that book ". $book->book_id);
-            $book = Book::find($book->book_id);
-            $current = Carbon::now();
-            $trialExpires = $current->addDays(14);
-            $borrowdate = $book->reserve_date;
-            Log::info("This is the borrow date " . $borrowdate);
-            $book->users()->wherePivot('borrow_date', $borrowdate)->updateExistingPivot($id, array('order_date' => $current,'due_date' => $trialExpires), false);
+            $length =count($books);
+
+            if($length != 0)
+            {
+                Log::info("This is the length of the array " . $length);
+                Log::info("These are the books I have gotten from query". $books);
+                $book = $books[0];
+                Log::info("This is the id of that book ". $book->book_id);
+                $book = Book::find($book->book_id);
+                $current = Carbon::now();
+                $trialExpires = $current->addDays(14);
+                $borrowdate = $book->reserve_date;
+                Log::info("This is the borrow date " . $borrowdate);
+                $book->users()->wherePivot('borrow_date', $borrowdate)->updateExistingPivot($id, array('order_date' => $current,'due_date' => $trialExpires), false);
+            }
+
             $bookcollection =  $data = DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();
             return response()->json($bookcollection);
         }
