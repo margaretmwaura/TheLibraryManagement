@@ -1,7 +1,7 @@
 <template>
 <v-app>
     <Navbar></Navbar>
-    <v-content >
+    <v-content class="mx-5">
         <router-view>
 
         </router-view>

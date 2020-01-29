@@ -18,7 +18,7 @@ class Admin
         }
         else{
             Log::info("User is common mwananchi");
-            return redirect('/');
+            return redirect('/home');
         }
 
     }

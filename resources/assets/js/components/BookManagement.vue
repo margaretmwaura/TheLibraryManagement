@@ -17,7 +17,7 @@
         <v-card class="pa-5" v-for="book in getallorderednreserved" :key="book.id">
             <v-layout row :class="`${checkBookStatus(book.return_date)}`">
                 <v-flex xs12 md12 >
-                    <div class="caption grey--text">Book Name</div>
+                    <div class="cption grey--text">Book Name</div>
                     <div>{{book.name}}</div>
                 </v-flex>
                 <v-flex xs6 sm2 md2>
@@ -25,15 +25,15 @@
                     <div>{{book.borrow_date}}</div>
                 </v-flex>
                 <v-flex xs6 sm2 md2>
-                    <div class="caption grey--text">Book Due Date</div>
+                    <div class="cption grey--text">Book Due Date</div>
                     <div>{{book.due_date}}</div>
                 </v-flex>
                 <v-flex xs6 sm2 md2>
-                    <div class="caption grey--text">Book Borrow Date</div>
+                    <div class="cption grey--text">Book Borrow Date</div>
                     <div>{{book.order_date}}</div>
                 </v-flex>
                 <v-flex xs6 sm2 md2>
-                    <div class="caption grey--text">Book Email</div>
+                    <div class="cption grey--text">Book Email</div>
                     <div>{{book.email}}</div>
                 </v-flex>
                 <v-flex xs6 sm2 md2>

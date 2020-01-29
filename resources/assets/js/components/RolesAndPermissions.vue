@@ -1,7 +1,6 @@
 <template>
     <v-container class="my-12">
         <h4 class="subheading grey--text">Roles and Permissions</h4>
-<!--        If doesnt work add wrap to v-layout-->
         <v-layout row justify-space-around>
             <v-flex xs12 md5>
                 <p>Add a permission</p>
@@ -20,13 +19,11 @@
         </v-layout>
         <v-layout row>
             <v-flex md12>
-                <h6 style="text-align: center">Connect or disconnect roles and permissions </h6>
+                <p>Connect or disconnect roles and permissions </p>
                 <form>
-                    <p>Pick a role below</p>
                     <v-autocomplete v-model="formAssign.role" :items="getallRolesg"  label="Role"
                               required>
                     </v-autocomplete>
-                    <p>Pick a permission below</p>
                     <v-autocomplete v-model="formAssign.permission" :items="getallPermissions"  label="Permission"
                     > </v-autocomplete>
                     <v-btn class="mr-4" @click="assign">Connect </v-btn>
@@ -49,7 +46,7 @@
         <v-card class="pa-5" v-for="user in getallUsersg" :key="user.id">
                 <v-layout row :class="`${roleidname(user.role_id)}`">
                     <v-flex xs12 md6 >
-                        <div class="caption grey--text">Name of user</div>
+                        <div class="cption grey--text">Name of user</div>
                         <div>{{user.id}}</div>
                     </v-flex>
                     <v-flex xs6 sm4 md2>
@@ -57,11 +54,11 @@
                         <div>{{user.name}}</div>
                     </v-flex>
                     <v-flex xs6 sm4 md2>
-                        <div class="caption grey--text">User Role</div>
+                        <div class="cption grey--text">User Role</div>
                         <div>{{roleidname(user.role_id)}}</div>
                     </v-flex>
                     <v-flex xs6 sm4 md2>
-                        <div class="caption grey--text">Change Status</div>
+                        <div class="cption grey--text">Change Status</div>
                         <div>
 <!--                                                    <v-chip small :class="`${roleidname(user.role_id)} white&#45;&#45;text caption my-2`">-->
 <!--                                                    Change role status-->

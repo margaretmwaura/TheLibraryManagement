@@ -4,27 +4,34 @@
             <v-app-bar-nav-icon @click="drawer=!drawer">
             </v-app-bar-nav-icon>
             <v-toolbar-title>
-                <span>Cytonn</span>
-                <span class="font-weight-light">Libraries</span>
+              <p id="head">
+                  <span>Cytonn</span>
+                  <span class="font-weight-light">Libraries</span>
+              </p>
+
             </v-toolbar-title>
             <v-spacer>
             </v-spacer>
-           <a href="/logout"> Logout </a>
-            <a href="/login">Login </a>
-           <a href="/register">Register </a>
+            <a href="/logout"> Logout </a>
+
         </v-app-bar>
         <v-navigation-drawer temporary app class="indigo" v-model="drawer" >
 
             <v-list>
                 <v-list-item v-for="item in links" :key="item.title" router :to="item.route">
                     <v-list-item-icon>
-                        <v-icon class="white--text">{{ item.icon }}</v-icon>
+                        <v-icon class="white--text">
+                           {{ item.icon }}</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title class="white--text">{{ item.title }}</v-list-item-title>
+                        <v-list-item-title class="white--text">
+                            <p id="title">{{ item.title }}</p></v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
+
+
+
         </v-navigation-drawer>
     </nav>
 </template>
@@ -40,7 +47,7 @@
                 links: [
                     { title: 'R/P management' , icon: 'mdi-account-arrow-right',route : '/rolesnperm'},
                     { title: 'B/Management' , icon: 'mdi-book-open-page-variant',route : '/bookman'},
-                    { title: 'Display' , icon: 'mdi-view-dashboard',route : '/display'},
+                    { title: 'Display' , icon: 'mdi-view-dashboard',route : '/'},
                 ],
             }
         }
@@ -49,4 +56,15 @@
 
 <style scoped>
 
+    #head
+    {
+        font-size:16px;
+        color:black;
+    }
+
+    #title
+    {
+        font-size:16px;
+        color:white;
+    }
 </style>

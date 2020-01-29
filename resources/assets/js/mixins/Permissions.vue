@@ -49,6 +49,10 @@
                     return true
                 }
             },
+            $can(permissionName)
+            {
+                return window.perm.indexOf(permissionName) !== -1;
+            }
         },
     };
 </script>

@@ -11,14 +11,18 @@
 |
 */
 
-Route::get('/admin', function () {
-    return view('home');
-});
+//Route::get('/admin', function () {
+//    return view('home');
+//});
 //    ->middleware('Admin');
 
 Auth::routes();
+Route::get('/', function () {
+    return view('home');
+})->middleware('auth');
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
+
 Route::resource('books','BooksController');
 Route::resource('permissions','PermissionsController');
 Route::resource('roles','RolesController');

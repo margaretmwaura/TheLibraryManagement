@@ -6,24 +6,24 @@
                 <v-btn class="ma-2" outlined color="indigo" dark v-on="on">Read More</v-btn>
             </template>
             <v-card>
-                <v-card-title class="headline grey lighten-2" primary-title>
-                  {{book.name}}
+                <v-card-title primary-title>
+                    <p>{{book.name}}</p>
                 </v-card-title>
                 <v-card-text>
-                  {{book.description}}
+                    <p>{{book.description}}</p>
                 </v-card-text>
                 <v-card-text>
-                    Author : {{book.author}}
+                    <p>Author : {{book.author}}</p>
                 </v-card-text>
                 <v-card-text>
-                   Category :  {{book.category}}
+                    <p>Category :  {{book.category}}</p>
                 </v-card-text>
                 <v-card-text>
                     <div v-if="checkRemainingBooks(getbookscount)">
-                        You have borrowed a total of {{getbookscount}} , the remaining borrow count is {{borrowcount(getbookscount)}}
+                        <p> You have borrowed a total of {{getbookscount}} , the remaining borrow count is {{borrowcount(getbookscount)}}</p>
                     </div>
                     <div v-else>
-                        You cannot borrow more books you have exceeded 3 books
+                        <p>You cannot borrow more books you have exceeded 3 books</p>
                     </div>
                 </v-card-text>
                 <v-divider></v-divider>
@@ -150,7 +150,13 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
+    p{
+        font-size:16px;
+        line-height: 1.5em;
+        text-align: center;
+        color:black;
+    }
 </style>
 

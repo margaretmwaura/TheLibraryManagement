@@ -18,7 +18,7 @@ const routes = [
     },
     {
         name : 'Display',
-        path: '/display',
+        path: '/',
         component: Displaybooks,
 
     },
