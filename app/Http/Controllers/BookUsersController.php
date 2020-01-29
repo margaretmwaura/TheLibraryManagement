@@ -115,13 +115,28 @@ class BookUsersController extends Controller
 
         try{
             $book->users()->wherePivot('due_date', $due_date)->updateExistingPivot($id, array('return_date' => Carbon::now()), false);
-            $bookcollection =  $data = DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();;
+
+            $id = $user->id;
+            // get an email for a user who had ordered the book
+            $books = DB::table('book_user')->where('name', $bookname)->whereNotNull("borrow_date")->get();
+            Log::info("These are the books I have gotten from query". $books);
+            $book = $books[0];
+            Log::info("This is the id of that book ". $book->book_id);
+            $book = Book::find($book->book_id);
+            $current = Carbon::now();
+            $trialExpires = $current->addDays(14);
+            $borrowdate = $book->reserve_date;
+            Log::info("This is the borrow date " . $borrowdate);
+            $book->users()->wherePivot('borrow_date', $borrowdate)->updateExistingPivot($id, array('order_date' => $current,'due_date' => $trialExpires), false);
+            $bookcollection =  $data = DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();
             return response()->json($bookcollection);
         }
        catch (\Exception $e)
        {
-           Log::info("There was an erro while updating");
+           Log::info("There was an erro while updating " . $e );
        }
+
+
     }
     public function getBooks()
     {

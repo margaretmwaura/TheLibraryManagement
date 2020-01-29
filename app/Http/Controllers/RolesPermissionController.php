@@ -48,7 +48,22 @@ class RolesPermissionController extends Controller
             Log::info("The error while assinging roles " . $e->getMessage());
         }
     }
-
+    public function detachingrolesandpermissions(Request $request)
+    {
+        Log::info("The request received " . $request);
+        $role = Role::where('name', $request->input('role'))->get();
+        $permission = Permission::where('name',$request->input('permission'))->get();
+        $id=$permission[0]->id;
+        Log::info("The role gotten " .$role[0]);
+        Log::info("The permissions gotten " . $permission[0] . " and the id is " . $id );
+        try {
+            $role[0]->permissions()->detach($id);
+        }
+        catch (\Exception $e)
+        {
+            Log::info("The error while assinging roles " . $e->getMessage());
+        }
+    }
     public function toggleUserRole(Request $request)
     {
         $id=$request->input("id");

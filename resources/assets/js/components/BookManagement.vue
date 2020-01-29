@@ -15,7 +15,7 @@
         </v-layout>
 
         <v-card class="pa-5" v-for="book in getallorderednreserved" :key="book.id">
-            <v-layout row :class="`${checkBookStatus(book.borrow_date)}`">
+            <v-layout row :class="`${checkBookStatus(book.return_date)}`">
                 <v-flex xs12 md12 >
                     <div class="caption grey--text">Book Name</div>
                     <div>{{book.name}}</div>
@@ -43,7 +43,7 @@
                 <v-flex xs6 sm2 md2>
                     <div>Action</div>
                     <div v-if="checkIfReturnIsThere(book.return_date)">
-                        <v-chip :class="`${checkBookStatus(book.borrow_date)}`" @click="returnbook(book)" >{{checkActionToTake(book.borrow_date)}}</v-chip>
+                        <v-chip :class="`${checkBookStatus(book.borrow_date,book.due_date)}`" @click="returnbook(book)" >{{checkActionToTake(book.borrow_date,book.due_date)}}</v-chip>
                     </div>
                 </v-flex>
             </v-layout>
@@ -116,26 +116,35 @@
             {
                 this.$store.dispatch('returnbook',book);
             },
-            checkBookStatus(orderdate){
+            checkBookStatus(returndate){
 
-                if(orderdate === null)
-                {
-                    return "borrowed"
-                }
-                else
-                {
-                    return "ordered"
-                }
+              if(returndate)
+              {
+                  return 'borrowed'
+              }
+              else
+              {
+                  return 'ordered'
+              }
             },
-            checkActionToTake(orderdate)
+            checkActionToTake(reserve, duedate)
             {
-                if(orderdate === null)
+
+                if(reserve === null && duedate !== null)
                 {
                     return "Return"
                 }
+                else if( duedate === null  &&  reserve !== null)
+                {
+                    return "awaiting collect"
+                }
+                else if( reserve !== null && duedate !== null)
+                {
+                    return "return"
+                }
                 else
                 {
-                    return "Collect"
+                    return "cawaiting collect"
                 }
             },
             checkIfReturnIsThere(return_date)

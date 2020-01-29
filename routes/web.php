@@ -23,6 +23,7 @@ Route::resource('permissions','PermissionsController');
 Route::resource('roles','RolesController');
 Route::get('/allperms','RolesPermissionController@getAllPerms');
 Route::post('/assign','RolesPermissionController@assignRoles');
+Route::post('/remove','RolesPermissionController@detachingrolesandpermissions');
 Route::get('/users','UserController@index');
 Route::post('/toggle','RolesPermissionController@toggleUserRole');
 Route::post('/orderbook','BookUsersController@orderBook');

@@ -2,8 +2,6 @@
         <template>
             <v-container fluid>
                 <v-data-iterator :items="getBooks"  hide-default-footer>
-
-
                     <template v-slot:header>
                         <v-toolbar class="mb-2" color="indigo darken-5" dark flat>
                             <v-toolbar-title>Below are all the books listed in the cytonn library</v-toolbar-title>

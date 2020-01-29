@@ -1,5 +1,6 @@
 <template>
     <div class="text-center">
+
         <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
                 <v-btn class="ma-2" outlined color="indigo" dark v-on="on">Read More</v-btn>
@@ -7,6 +8,7 @@
             <v-card>
                 <v-card-title class="headline grey lighten-2" primary-title>
                   {{book.name}}
+                    {{getbookscount}}
                 </v-card-title>
                 <v-card-text>
                   {{book.description}}
@@ -20,13 +22,15 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="deleting(book.id)"  v-if="$candelete('Order',book.status_id)">Delete</v-btn>
+                    <v-btn v-on:click="deleting(book.id)"  v-if="$candelete('Normal',book.status_id)">Delete</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="editting(book)"  v-if="$canedit('Order',book.status_id)">Edit </v-btn>
+                    <v-btn v-on:click="editting(book)"  v-if="$canedit('Normal',book.status_id)">Edit </v-btn>
                     <v-spacer></v-spacer>
-                        <v-btn v-on:click="reserveBook(book)" v-if="$canreserve('Order',book.status_id)">Reserve </v-btn>
-                    <v-spacer></v-spacer>
-                        <v-btn  v-on:click="orderBook(book)" v-if="$canborrow('Order',book.status_id)">Borrow </v-btn>
+                    <div v-if="checkRemainingBooks(getbookscount)">
+                        <v-btn  v-on:click="orderBook(book)" v-if="$canborrow('Normal',book.status_id)">Borrow </v-btn>
+                        <v-spacer></v-spacer>
+                    </div>
+                    <v-btn v-on:click="reserveBook(book)" v-if="$canreserve('Normal',book.status_id)">Reserve </v-btn>
                     <v-spacer></v-spacer>
                     <v-divider></v-divider>
                     <v-btn color="primary" text @click="togglingPermissions">
@@ -50,7 +54,7 @@
             }
         },
         computed: {
-            ...mapGetters(['getallRolesg']),
+            ...mapGetters(['getallRolesg','getbookscount']),
         },
         props: {
             book: Array,
@@ -109,7 +113,27 @@
                 {
                     return false
                 }
-            }
+            },
+            checkRemainingBooks(count)
+            {
+                if(count < 3)
+                {
+                    console.log("The condition sis true");
+                    return true
+                }
+                if(count >= 3)
+                {
+                    console.log("The condition sis true");
+                    return false;
+                }
+                else
+                {
+                    console.log("The condition sis false");
+                    return false
+                }
+
+
+                }
         }
     }
 </script>

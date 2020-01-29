@@ -20,14 +20,15 @@
         </v-layout>
         <v-layout row>
             <v-flex md12>
-                <h6 style="text-align: center">Add a role to a permission</h6>
+                <h6 style="text-align: center">Connect or disconnect roles and permissions </h6>
                 <form>
                     <v-autocomplete v-model="formAssign.role" :items="getallRolesg"  label="Role"
                               required>
                     </v-autocomplete>
                     <v-autocomplete v-model="formAssign.permission" :items="getallPermissions"  label="Permission"
                     > </v-autocomplete>
-                    <v-btn class="mr-4" @click="assign">submit</v-btn>
+                    <v-btn class="mr-4" @click="assign">Connect </v-btn>
+                    <v-btn class="mr-4" @click="remove">Disconnect </v-btn>
                 </form>
             </v-flex>
         </v-layout>
@@ -152,6 +153,11 @@
             {
                 console.log("What we will be using for the assigning" + this.formAssign);
                 this.$store.dispatch('assignPermissionToRole',this.formAssign);
+            },
+            remove()
+            {
+                console.log("What we will be using for the assigning" + this.formAssign);
+                this.$store.dispatch('removePermissionToRole',this.formAssign);
             },
             togglingPermissions: function(user)
             {

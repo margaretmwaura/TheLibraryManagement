@@ -161,6 +161,16 @@ export default new Vuex.Store({
                 {
                 })
         },
+        removePermissionToRolemut(state,data)
+        {
+            axios.post('/remove',data)
+                .then(response => {
+
+                })
+                .catch(error =>
+                {
+                })
+        },
         deleteABookMut(state,id)
         {
             axios
@@ -210,6 +220,7 @@ export default new Vuex.Store({
                     {
 
                         this.state.books = response.data.original;
+                        this.state.bookscount = this.state.bookscount + 1;
                         console.log("This is the response after order " , response.data.original);
                         this.state.ordersuccess = "Successful"
                     }
@@ -426,6 +437,10 @@ export default new Vuex.Store({
             assignPermissionToRole(state,data)
             {
                 state.commit('assignPermissionToRolemut',data)
+            },
+            removePermissionToRole(state,data)
+            {
+                state.commit('removePermissionToRolemut',data)
             },
             toggleRoles(state,user)
             {
