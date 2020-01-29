@@ -6,9 +6,9 @@
                 console.log("This is the status of the book " , status);
                 console.log("Thses is the permission we have been given " , permissionName);
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
-                console.log("This is the status of the availability of the permission " , permstat)
+                console.log("This is the status of the availability of the permission " , permstat);
 
-                if(permstat === true && status === 1)
+                if(permstat === true && status === 6)
                 {
                     return true
                 }
@@ -20,7 +20,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === 1)
+                if(permstat === true && status === 6)
                 {
                     return true
                 }
@@ -32,7 +32,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === 1)
+                if(permstat === true && status === 6)
                 {
                     return true
                 }
@@ -44,7 +44,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === 2)
+                if(permstat === true && status === 7)
                 {
                     return true
                 }

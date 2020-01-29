@@ -35,7 +35,7 @@ class BookUsersController extends Controller
         $name = $book->name;
 
         //Changing status
-        $book->status_id=2;
+        $book->status_id=7;
         $book->save();
         $book->users()->attach($user_id,['due_date'=>$trialExpires,'order_date'=>Carbon::now(),'email'=>$email,'name'=>$name]);
 
@@ -55,7 +55,7 @@ class BookUsersController extends Controller
 
         $book=Book::find($id);
         $name=$book->name;
-        $book->status_id=3;
+        $book->status_id=8;
         $book->reserve_date=Carbon::now();
         $book->save();
         $book->users()->attach($user_id,['borrow_date' => Carbon::now(),'email'=>$email,'name'=>$name]);
