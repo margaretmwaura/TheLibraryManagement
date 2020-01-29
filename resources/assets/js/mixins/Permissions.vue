@@ -1,4 +1,5 @@
 <script>
+    import {mapGetters} from "vuex";
     export default {
         methods: {
             $canedit(permissionName,status) {
