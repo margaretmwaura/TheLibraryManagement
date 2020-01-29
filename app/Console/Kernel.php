@@ -17,6 +17,10 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('command:duedatecheck')
                   ->everyMinute();
+//                  ->dailyAt('08:00');
+        $schedule->command('command:weeklyreport')
+                  ->everyMinute();
+//            ->weekly();
     }
 
 

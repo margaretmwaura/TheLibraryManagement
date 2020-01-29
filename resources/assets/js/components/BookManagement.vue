@@ -4,10 +4,10 @@
             <v-flex md12>
                 <p>Add a Book</p>
                 <v-form v-model="valid" ref="form">
-                    <v-text-field label="Book Name" v-model="form.name" :rules="nameRules" :counter="20"  color="purple darken-2" > </v-text-field>
-                    <v-text-field label="Book category" v-model="form.category" :rules="categoryRules" :counter="10"  color="purple darken-2" > </v-text-field>
-                    <v-text-field label="Release year" v-model="form.year" :rules="yearRules" :counter="10"  color="purple darken-2" > </v-text-field>
-                    <v-text-field label="Book author" v-model="form.author" :rules="authorRules" :counter="10"  color="purple darken-2" > </v-text-field>
+                    <v-text-field label="Book Name" v-model="form.name" :rules="nameRules" :counter="30"  color="purple darken-2" > </v-text-field>
+                    <v-text-field label="Book category" v-model="form.category" :rules="categoryRules" :counter="20"  color="purple darken-2" > </v-text-field>
+                    <v-text-field label="Release year" v-model="form.year" :rules="yearRules" :counter="4"  color="purple darken-2" > </v-text-field>
+                    <v-text-field label="Book author" v-model="form.author" :rules="authorRules" :counter="20"  color="purple darken-2" > </v-text-field>
                     <v-textarea label="Book description" v-model="form.description" :rules="urlRules" :counter="200"  color="purple darken-2" > </v-textarea>
                     <v-btn @click="create" :class="{ red: !valid, blue: valid }">Add book </v-btn>
                 </v-form>
@@ -37,7 +37,7 @@
                     <div>{{book.email}}</div>
                 </v-flex>
                 <v-flex xs6 sm2 md2>
-                    <div class="caption grey--text">Book Return Date</div>
+                    <div class="cption grey--text">Book Return Date</div>
                     <div>{{book.return_date}}</div>
                 </v-flex>
                 <v-flex xs6 sm2 md2>
@@ -70,19 +70,19 @@
                 valid_one: false,
                 nameRules: [
                     (v) => !!v || 'A name is required',
-                    (v) => v && v.length <= 20 || 'Name must be less than 10 characters'
+                    (v) => v && v.length <= 30 || 'Name must be less than 10 characters'
                 ],
                 categoryRules: [
                     (v) => !!v || 'A category is required',
-                    (v) => v && v.length <= 10 || 'Category must be less than 10 characters'
+                    (v) => v && v.length <= 20 || 'Category must be less than 10 characters'
                 ],
                 yearRules: [
                     (v) => !!v || 'A year is required',
-                    (v) => v && v.length <= 10 || 'Year must be less than 10 characters'
+                    (v) => v && v.length <= 4 || 'Year must be less than 4 characters'
                 ],
                 authorRules: [
                     (v) => !!v || 'An author is required',
-                    (v) => v && v.length <= 10 || 'Author must be less than 10 characters'
+                    (v) => v && v.length <= 20 || 'Author must be less than 10 characters'
                 ],
                 urlRules: [
                     (v) => !!v || 'A description is required',

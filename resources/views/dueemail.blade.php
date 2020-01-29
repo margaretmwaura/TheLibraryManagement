@@ -1,14 +1,11 @@
 <html>
 <head>
-    <title>App Name - @yield('title')</title>
+
 </head>
 <body>
-@section('sidebar')
-    This is the master sidebar.
-@show
+<h5>Hi there </h5>
 
-<div class="container">
-   This is due to the cron job
-</div>
+<p> Your return date for the book {{$days->bookname}} is due in {{$days->time}}</p>
+
 </body>
 </html>

@@ -13,17 +13,18 @@ class PermissionsController extends Controller
     public function __construct(PermissionRepositoryInterface $permissionRepository)
     {
         $this->permissionRepository = $permissionRepository;
+        $this->middleware('Admin');
     }
     public function index()
     {
-        $permission = $this->permissionRepository->all();
+        $permission=$this->permissionRepository->all();
         return response()->json($permission);
     }
 
     public function store(Request $request)
     {
-        Log::info("This is the request " . $request);
-       $perms =  $this->permissionRepository->storeRecord($request->all());
+        Log::info("This is the request ".$request);
+       $perms=$this->permissionRepository->storeRecord($request->all());
         return response()->json($perms);
     }
     public function update(Request $request, $id)

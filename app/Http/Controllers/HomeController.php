@@ -31,4 +31,13 @@ class HomeController extends Controller
 
 
     }
+
+    public function admin()
+    {
+
+        $users = User::all();
+        return view('admin') -> with('users',$users);
+
+
+    }
 }

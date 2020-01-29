@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\emaildata;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -16,16 +17,11 @@ class duedatesmails extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $days;
+    public function __construct(emaildata $days)
     {
-        //
+        $this->days = $days;
     }
-
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->from('mwauramargaret1@gmail.com')

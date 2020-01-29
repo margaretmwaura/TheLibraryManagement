@@ -19,9 +19,10 @@
 Auth::routes();
 Route::get('/', function () {
     return view('home');
-})->middleware('auth');
+})->middleware(['auth','rolemiddleware']);
 
 Route::get('/home', 'HomeController@index');
+Route::get('/admin', 'HomeController@admin');
 
 Route::resource('books','BooksController');
 Route::resource('permissions','PermissionsController');
@@ -39,3 +40,10 @@ Route::get('/bookscount','BookUsersController@getBooks');
 Route::get('/emailing','BookUsersController@sendingemails');
 Route::get('/rolenperms','RolesPermissionController@gettingallrolesnadpermissions');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/books','BooksCommon@index');
+//This is for downloading the pdf
+
+////The books routes
+
+Route::get('/index','PdfController@index');
+Route::post('/booksedit','BooksController@update');

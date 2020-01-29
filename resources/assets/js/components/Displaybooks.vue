@@ -1,6 +1,8 @@
 
         <template>
+
             <v-container fluid>
+                <p>These are the total number of books you have borrowed {{getbookscount}}</p>
                 <v-data-iterator :items="getBooks"  hide-default-footer>
                     <template v-slot:header>
                         <v-toolbar class="mb-2" color="indigo darken-5" dark flat>

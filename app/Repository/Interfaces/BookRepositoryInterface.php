@@ -12,7 +12,7 @@ interface BookRepositoryInterface
     public function all();
     public function storeRecord($request);
     public function deleteRecord($id);
-    public function updateRecord(Request $request, $id);
+    public function updateRecord(Request $request);
 
 
 }

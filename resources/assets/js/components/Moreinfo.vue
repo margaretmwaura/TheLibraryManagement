@@ -29,15 +29,15 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="deleting(book.id)"  v-if="$candelete('Normal',book.status_id)">Delete</v-btn>
+                    <v-btn v-on:click="deleting(book.id)"  v-if="$candelete('Delete',book.status_id)">Delete</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn v-on:click="editting(book)"  v-if="$canedit('Normal',book.status_id)">Edit </v-btn>
+                    <v-btn v-on:click="editting(book)"  v-if="$canedit('Edit',book.status_id)">Edit </v-btn>
                     <v-spacer></v-spacer>
                     <div v-if="checkRemainingBooks(getbookscount)">
-                        <v-btn  v-on:click="orderBook(book)" v-if="$canborrow('Normal',book.status_id)">Borrow </v-btn>
+                        <v-btn  v-on:click="orderBook(book)" v-if="$canborrow('Borrow',book.status_id)">Borrow </v-btn>
                         <v-spacer></v-spacer>
                     </div>
-                    <v-btn v-on:click="reserveBook(book)" v-if="$canreserve('Normal',book.status_id)">Reserve </v-btn>
+                    <v-btn v-on:click="reserveBook(book)" v-if="$canreserve('Reserve',book.status_id)">Reserve </v-btn>
                     <v-spacer></v-spacer>
                     <v-divider></v-divider>
                     <v-btn color="primary" text @click="togglingPermissions">

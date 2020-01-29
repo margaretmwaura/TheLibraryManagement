@@ -13,7 +13,7 @@ class RolesPermissionController extends Controller
 
     public function getAllPerms()
     {
-        $roles = Role::all();
+        $roles=Role::all();
         $collection = collect([]);
         try{
             $roles->each(function ($item, $key) use ($collection) {
@@ -27,7 +27,7 @@ class RolesPermissionController extends Controller
         }
         catch (\Exception $e)
         {
-            Log::info("The reasons for not getting the collection " . $e->getMessage());
+            Log::info("The reasons for not getting the collection ".$e->getMessage());
         }
         return response()->json($collection);
     }
@@ -35,8 +35,8 @@ class RolesPermissionController extends Controller
     public function assignRoles(Request $request)
     {
        Log::info("The request received " . $request);
-       $role = Role::where('name', $request->input('role'))->get();
-       $permission = Permission::where('name',$request->input('permission'))->get();
+       $role=Role::where('name', $request->input('role'))->get();
+       $permission=Permission::where('name',$request->input('permission'))->get();
         $id=$permission[0]->id;
        Log::info("The role gotten " .$role[0]);
        Log::info("The permissions gotten " . $permission[0] . " and the id is " . $id );
@@ -54,8 +54,8 @@ class RolesPermissionController extends Controller
     public function detachingrolesandpermissions(Request $request)
     {
         Log::info("The request received " . $request);
-        $role = Role::where('name', $request->input('role'))->get();
-        $permission = Permission::where('name',$request->input('permission'))->get();
+        $role=Role::where('name', $request->input('role'))->get();
+        $permission=Permission::where('name',$request->input('permission'))->get();
         $id=$permission[0]->id;
         Log::info("The role gotten " .$role[0]);
         Log::info("The permissions gotten " . $permission[0] . " and the id is " . $id );
@@ -93,12 +93,13 @@ class RolesPermissionController extends Controller
         }
 
 
-        $users = User::all();
+        $users=User::all();
         return response()->json($users);
     }
     public function gettingallrolesnadpermissions()
     {
-        $myvar = Role::with("permissions")->get();
+        $myvar=Role::with("permissions")->get();
+
         echo $myvar;
     }
 }

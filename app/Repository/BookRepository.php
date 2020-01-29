@@ -31,21 +31,19 @@ class BookRepository implements BookRepositoryInterface
         return Book::all();
     }
 
-    public function updateRecord(Request $request, $id)
+    public function updateRecord(Request $request)
     {
-        $book = Book::find($id);
-       $book->update($request->all());
-
-//
         try {
-            $book->setTile($request->input('title'));
-            $book->setMessage($request->input('message'));
-            $book->setDate(\Carbon\Carbon::now());
-
-            $book->save();
-            Log::info("Data has been saved");
-        } catch (\Exception $exception) {
-            Log::info("An error was encounterd" . $exception->getMessage());
+            $id = $request->input('id');
+            Log::info("This is the id of the book while we are editting" . $id);
+            $book = Book::find($id);
+            $book->update($request->all());
         }
+        catch (\Exception $e)
+        {
+            Log::info("There was an error");
+        }
+
+
     }
 }

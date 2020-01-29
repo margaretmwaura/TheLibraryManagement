@@ -204,6 +204,27 @@ export default new Vuex.Store({
                     this.state.deletefail = "Failed"
                 })
         },
+        editABookMut(state,data)
+        {
+            axios
+                .post('/booksedit',data)
+                .then(response => {
+                    const code = response.status;
+                    if(code === 200)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                })
+                .catch(error =>
+                {
+
+                })
+        },
+
         toggleRolesMut(state , user)
         {
             console.log(user);
@@ -539,6 +560,10 @@ export default new Vuex.Store({
             clearAddPermFail(state)
             {
                state.commit("clearAddPermFailMut")
+            },
+            editABook(state,data)
+            {
+                state.commit("editABookMut",data)
             }
 
         },

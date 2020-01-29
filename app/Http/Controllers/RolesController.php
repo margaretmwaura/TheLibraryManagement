@@ -14,18 +14,19 @@ class RolesController extends Controller
 
     public function __construct(RoleRepositoryInterface $roleRepository)
     {
-        $this->roleRepository = $roleRepository;
+        $this->roleRepository=$roleRepository;
+        $this->middleware('Admin');
     }
     public function index()
     {
-        $roles = $this->roleRepository->all();
+        $roles=$this->roleRepository->all();
         return response()->json($roles);
     }
 
     public function store(Request $request)
     {
-        Log::info("This is the request " . $request);
-        $roles = $this->roleRepository->storeRecord($request->all());
+        Log::info("This is the request ".$request);
+        $roles=$this->roleRepository->storeRecord($request->all());
         return response()->json($roles);
 
     }
