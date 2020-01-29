@@ -78,17 +78,17 @@ class RolesPermissionController extends Controller
 
         if($newrole=="Admin")
         {
-            $user->role_id=9;
+            $user->role_id=35;
             $user->save();
         }
         if($newrole=="User")
         {
-            $user->role_id=7;
+            $user->role_id=36;
             $user->save();
         }
         if($newrole=="Normal")
         {
-            $user->role_id=11;
+            $user->role_id=37;
             $user->save();
         }
 
