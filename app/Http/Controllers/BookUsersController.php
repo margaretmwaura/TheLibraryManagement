@@ -102,9 +102,6 @@ class BookUsersController extends Controller
     }
     public function returnbook(Request $request)
     {
-        $statuss=\App\Models\Status::where('name','AVAILABLE')->get();
-        $status=$statuss[0];
-        $statusid = $status->id;
 
         $bookname=$request->input("name");
         $useremail=$request->input("email");
@@ -140,6 +137,14 @@ class BookUsersController extends Controller
 
             if($length != 0)
             {
+                $statuss=\App\Models\Status::where('name','NOTAVAILABLE')->get();
+                $status=$statuss[0];
+                $statusid = $status->id;
+                $book->status_id=$statusid;
+                Log::info("The book is now available");
+                $book->save();
+
+
                 Log::info("This is the length of the array ".$length);
                 Log::info("These are the books I have gotten from query".$books);
                 $book=$books[0];
@@ -157,6 +162,9 @@ class BookUsersController extends Controller
 //                Mail::to("mwauramargaret1@gmail.com")->send(new collectbook($bookname));
             }
             else{
+                $statuss=\App\Models\Status::where('name','AVAILABLE')->get();
+                $status=$statuss[0];
+                $statusid = $status->id;
                 $book->status_id=$statusid;
                 Log::info("The book is now available");
                 $book->save();
