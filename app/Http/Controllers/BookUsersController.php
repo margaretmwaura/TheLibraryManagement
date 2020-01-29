@@ -19,6 +19,11 @@ class BookUsersController extends Controller
     public $countvar;
     public function orderBook(Request $request)
     {
+        $statuss=\App\Models\Status::where('name','NOTAVAILABLE')->get();
+        $status=$statuss[0];
+        $statusid = $status->id;
+
+
         Log::info($request->all());
         Log::info("ordering a book ".$request->input("id"));
         Log::info("Currently logged in user ".Auth::user()->id);
@@ -35,7 +40,7 @@ class BookUsersController extends Controller
         $name = $book->name;
 
         //Changing status
-        $book->status_id=7;
+        $book->status_id=$statusid;
         $book->save();
         $book->users()->attach($user_id,['due_date'=>$trialExpires,'order_date'=>Carbon::now(),'email'=>$email,'name'=>$name]);
 
@@ -46,6 +51,10 @@ class BookUsersController extends Controller
     }
     public function reservebook(Request $request)
     {
+        $statuss=\App\Models\Status::where('name','RESERVABLENOT')->get();
+        $status=$statuss[0];
+        $statusid = $status->id;
+
         Log::info("ordering a book ".$request->input("id"));
         Log::info("Currently logged in user " . Auth::user()->id);
         $id=$request->input("id");
@@ -55,7 +64,7 @@ class BookUsersController extends Controller
 
         $book=Book::find($id);
         $name=$book->name;
-        $book->status_id=8;
+        $book->status_id=$statusid;
         $book->reserve_date=Carbon::now();
         $book->save();
         $book->users()->attach($user_id,['borrow_date' => Carbon::now(),'email'=>$email,'name'=>$name]);
@@ -93,6 +102,10 @@ class BookUsersController extends Controller
     }
     public function returnbook(Request $request)
     {
+        $statuss=\App\Models\Status::where('name','AVAILABLE')->get();
+        $status=$statuss[0];
+        $statusid = $status->id;
+
         $bookname=$request->input("name");
         $useremail=$request->input("email");
         $due_date=$request->input("due_date");
@@ -142,6 +155,10 @@ class BookUsersController extends Controller
                 Log::info("This is the borrow date ".$borrowdate);
                 $book->users()->wherePivot('borrow_date',$borrowdate)->updateExistingPivot($id, array('order_date' => $current,'due_date' => $trialExpires), false);
                 Mail::to("mwauramargaret1@gmail.com")->send(new collectbook($bookname));
+            }
+            else{
+                $book->status_id=$statusid;
+                $book->save();
             }
 
             $bookcollection=$data=DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();
