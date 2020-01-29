@@ -17,10 +17,10 @@ class rolemiddleware
      */
     public function handle($request, Closure $next)
     {
-        $roles_id = \App\Models\Role::where('name','Admin')->pluck('id');
+//        $roles_id = \App\Models\Role::where('name','Admin')->pluck('id');
 
         $role = Auth::user()->role_id;
-        if ($role == $roles_id) {
+        if ($role == 35) {
             Log::info("User is Admin");
             return redirect('/admin');
         } else {
