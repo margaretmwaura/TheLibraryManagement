@@ -13,6 +13,7 @@ export default new Vuex.Store({
         allUsers:[],
         allorderednreserved:[],
         bookscount:0,
+        statases:[],
 
         // The below variables hold the values that show the status of the result
         ordersuccess:'',
@@ -394,8 +395,18 @@ export default new Vuex.Store({
         clearAddPermFailMut()
         {
             this.state.addpermfail = " "
+        },
+        getallstatasesmut()
+        {
+            axios.get('/statases')
+                .then(response => {
+                    this.state.statases = response.data;
+                    console.log("This is the data I have gotten in regards to roles " + this.books)
+                })
+                .catch(error =>
+                {
+                })
         }
-
         },
     getters:
         {
@@ -422,8 +433,10 @@ export default new Vuex.Store({
             },
             getrolesnperms:state => {
                 return state.rolesnperms
+            },
+            returnstatuses:state => {
+                return state.statases;
             }
-
 
         },
     actions:
@@ -564,6 +577,10 @@ export default new Vuex.Store({
             editABook(state,data)
             {
                 state.commit("editABookMut",data)
+            },
+            getallstatasesmut(state)
+            {
+                state.commit("getallstatasesmut");
             }
 
         },

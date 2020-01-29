@@ -8,7 +8,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat);
 
-                if(permstat === true && status === 6)
+                if(permstat === true && status === returnstatuses[0].id)
                 {
                     console.log("Edit permission is present");
                     return true
@@ -21,7 +21,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === 6)
+                if(permstat === true && status === returnstatuses[0].id)
                 {
                     console.log("delete permission is present");
                     return true
@@ -34,7 +34,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === 6)
+                if(permstat === true && status === returnstatuses[0].id)
                 {
                     console.log("borrow permission is present");
                     return true
@@ -47,13 +47,21 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === 7)
+                if(permstat === true && status === returnstatuses[1].id)
                 {
                     console.log("reserve permission is present");
                     return true
                 }
             },
+
+
+        },
+        mounted() {
+            this.$store.dispatch('getallstatasesmut');
+        },
+        computed: {
+            ...mapGetters(['returnstatuses']),
         },
     };
 </script>
-s
+

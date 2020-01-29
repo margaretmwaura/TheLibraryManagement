@@ -47,3 +47,4 @@ Route::get('/books','BooksCommon@index');
 
 Route::get('/index','PdfController@index');
 Route::post('/booksedit','BooksController@update');
+Route::get('/statases','StatusController@index');
