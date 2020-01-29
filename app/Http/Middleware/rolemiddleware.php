@@ -17,8 +17,8 @@ class rolemiddleware
      */
     public function handle($request, Closure $next)
     {
-        $roles_id = \App\Models\Role::where('name','Admin')->pluck('id');
-
+        $roles = \App\Models\Role::where('name','Admin')->get();
+        $roles_id = $roles->id;
         $role = Auth::user()->role_id;
         if ($role == $roles_id) {
             Log::info("User is Admin");
