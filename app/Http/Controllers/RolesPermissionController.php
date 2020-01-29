@@ -76,19 +76,34 @@ class RolesPermissionController extends Controller
         Log::info("The request received role id of user " . $id);
         $user = User::find($id);
 
+
+
         if($newrole=="Admin")
         {
-            $user->role_id=35;
+            $roles = \App\Models\Role::where('name','Admin')->get();
+            $onerole = $roles[0];
+            $roles_id = $onerole->id;
+
+            $user->role_id= $roles_id;
             $user->save();
         }
         if($newrole=="User")
         {
-            $user->role_id=36;
+            $roles = \App\Models\Role::where('name','User')->get();
+            $onerole = $roles[0];
+            $roles_id = $onerole->id;
+
+            $user->role_id= $roles_id;
             $user->save();
         }
         if($newrole=="Normal")
         {
-            $user->role_id=37;
+
+            $roles = \App\Models\Role::where('name','Normal')->get();
+            $onerole = $roles[0];
+            $roles_id = $onerole->id;
+
+            $user->role_id=$roles_id;
             $user->save();
         }
 
