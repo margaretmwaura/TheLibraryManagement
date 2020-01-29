@@ -154,7 +154,7 @@ class BookUsersController extends Controller
                 $borrowdate=$book->reserve_date;
                 Log::info("This is the borrow date ".$borrowdate);
                 $book->users()->wherePivot('borrow_date',$borrowdate)->updateExistingPivot($id, array('order_date' => $current,'due_date' => $trialExpires), false);
-                Mail::to("mwauramargaret1@gmail.com")->send(new collectbook($bookname));
+//                Mail::to("mwauramargaret1@gmail.com")->send(new collectbook($bookname));
             }
             else{
                 $book->status_id=$statusid;
