@@ -11,7 +11,7 @@ class Admin
     public function handle($request, Closure $next)
     {
         $role = Auth::user()->role_id;
-        if($role == 9 || $role == 35)
+        if($role == 35)
         {
             Log::info("User is Admin");
             return $next($request);
