@@ -10,6 +10,7 @@
 
                 if(permstat === true && status === 6)
                 {
+                    console.log("Edit permission is present");
                     return true
                 }
             },
@@ -22,6 +23,7 @@
 
                 if(permstat === true && status === 6)
                 {
+                    console.log("delete permission is present");
                     return true
                 }
             },
@@ -34,6 +36,7 @@
 
                 if(permstat === true && status === 6)
                 {
+                    console.log("borrow permission is present");
                     return true
                 }
             },
@@ -46,6 +49,7 @@
 
                 if(permstat === true && status === 7)
                 {
+                    console.log("reserve permission is present");
                     return true
                 }
             },
