@@ -17,7 +17,7 @@ class rolemiddleware
      */
     public function handle($request, Closure $next)
     {
-        $roles_id = \App\Models\Role::where('name','Admin')->pluck('id');
+        $roles_id = \App\Models\Role::where('name','LIKE','Admin')->pluck('id');
 
         $role = Auth::user()->role_id;
         if ($role == $roles_id) {
