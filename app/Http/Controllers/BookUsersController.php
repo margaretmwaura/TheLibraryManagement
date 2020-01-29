@@ -158,6 +158,7 @@ class BookUsersController extends Controller
             }
             else{
                 $book->status_id=$statusid;
+                Log::info("The book is now available");
                 $book->save();
             }
 
