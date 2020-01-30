@@ -9,7 +9,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat);
 
-                if(permstat === true && status === returnstatuses[0].id)
+                if(permstat === true && status === 6)
                 {
                     console.log("Edit permission is present");
                     return true
@@ -22,7 +22,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === returnstatuses[0].id)
+                if(permstat === true && status === 6)
                 {
                     console.log("delete permission is present");
                     return true
@@ -35,7 +35,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === returnstatuses[0].id)
+                if(permstat === true && status === 6)
                 {
                     console.log("borrow permission is present");
                     return true
@@ -48,7 +48,7 @@
                 let permstat =  window.perm.indexOf(permissionName) !== -1;
                 console.log("This is the status of the availability of the permission " , permstat)
 
-                if(permstat === true && status === returnstatuses[1].id)
+                if(permstat === true && status === 7)
                 {
                     console.log("reserve permission is present");
                     return true
