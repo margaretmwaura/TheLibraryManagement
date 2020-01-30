@@ -137,21 +137,13 @@ class BookUsersController extends Controller
 
             if($length != 0)
             {
-                $statuss=\App\Models\Status::where('name','NOTAVAILABLE')->get();
-                $status=$statuss[0];
-                $statusid = $status->id;
-                $book->status_id=$statusid;
-                Log::info("The book is now available");
-                $book->save();
-
-
-                Log::info("This is the length of the array ".$length);
-                Log::info("These are the books I have gotten from query".$books);
-                $book=$books[0];
-                Log::info("This is the id of that book ".$book->book_id);
-                $book=Book::find($book->book_id);
-                $email=$book->email;
-                Log::info("The person to send an email to ".$email);
+//                Log::info("This is the length of the array ".$length);
+//                Log::info("These are the books I have gotten from query".$books);
+//                $book=$books[0];
+//                Log::info("This is the id of that book ".$book->book_id);
+//                $book=Book::find($book->book_id);
+//                $email=$book->email;
+//                Log::info("The person to send an email to ".$email);
 
 
                 $current=Carbon::now();
@@ -159,6 +151,14 @@ class BookUsersController extends Controller
                 $borrowdate=$book->reserve_date;
                 Log::info("This is the borrow date ".$borrowdate);
                 $book->users()->wherePivot('borrow_date',$borrowdate)->updateExistingPivot($id, array('order_date' => $current,'due_date' => $trialExpires), false);
+
+
+                $statuss=\App\Models\Status::where('name','NOTAVAILABLE')->get();
+                $status=$statuss[0];
+                $statusid = $status->id;
+                $book->status_id=$statusid;
+                Log::info("The book is now available");
+                $book->save();
 //                Mail::to("mwauramargaret1@gmail.com")->send(new collectbook($bookname));
             }
             else{
