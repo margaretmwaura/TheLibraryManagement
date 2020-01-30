@@ -3,9 +3,12 @@
 namespace Tests\Feature;
 
 use App\Models\Book;
+use App\Models\Role;
 use App\Models\User;
-use App\Models\Writeup;
+
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,11 +16,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DatabaseTest extends TestCase
 {
-//        use DatabaseTransactions;
-//    use RefreshDatabase;
-    public function test_signed_in_user_can_see_create_form()
+//        use RefreshDatabase;
+
+   use DatabaseMigrations;
+   use WithoutMiddleware;
+    public function test_signed_in_user_can_see_logo()
     {
-        $user = factory(User::class)->create(['role_id' => 35]);
+//        factory(Role::class)->create(['id' => 35]);
+        $user = factory(User::class)->create();
         $this->actingAs($user);
         $this->get('/')->assertSee('Cytonn Libraries');
     }
@@ -25,8 +31,9 @@ class DatabaseTest extends TestCase
     {
         Event::fake();
         $this->withoutExceptionHandling();
-        $user = factory(User::class)->create(['role_id' => 35]);
-        $this->post('books',[
+//        $role = factory(User::class)->make();
+        $user = factory(User::class)->create();
+        $this->post('/books',[
             'name' => 'This is Maggie',
             'descritption' => 'Gal is writtng tests' ,
             'status_id' => 6,
@@ -34,11 +41,11 @@ class DatabaseTest extends TestCase
         $this->assertCount(1,Book::all());
 //        $this->assertDatabaseHas('writeups', array $data);
     }
-    public function test_getting_blogs_from_database()
+    public function test_getting_books_from_database()
     {
         $user = factory(User::class)->create();
         factory(Book::class)->create(['status_id' => 6]);
-        $response = $this->get('books');
-        $response->assertStatus(201);
+        $response = $this->get('/books')
+        ->assertStatus(200);
     }
 }

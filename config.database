@@ -1,0 +1,5 @@
+'phpunit' => [
+            'driver'   => 'sqlite',
+            'database' => storage_path('phpunit.sqlite'),
+            'prefix'   => '',
+        ],

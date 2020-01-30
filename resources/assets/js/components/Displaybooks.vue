@@ -61,7 +61,7 @@
                 Moreinfo
             },
         computed: {
-            ...mapGetters(['getBooks','getbookscount']),
+            ...mapGetters(['getBooks']),
             numberOfPages () {
                 return Math.ceil(this.getBooks.length / this.itemsPerPage)
             },
@@ -71,7 +71,7 @@
         },
         mounted() {
             this.$store.dispatch('getallbooks');
-            this.$store.dispatch('getallusersbooks');
+            // this.$store.dispatch('getallusersbooks');
 
         },
         methods:{

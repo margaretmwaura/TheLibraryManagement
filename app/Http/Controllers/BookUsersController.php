@@ -137,13 +137,13 @@ class BookUsersController extends Controller
 
             if($length != 0)
             {
-//                Log::info("This is the length of the array ".$length);
-//                Log::info("These are the books I have gotten from query".$books);
-//                $book=$books[0];
-//                Log::info("This is the id of that book ".$book->book_id);
-//                $book=Book::find($book->book_id);
-//                $email=$book->email;
-//                Log::info("The person to send an email to ".$email);
+                Log::info("This is the length of the array ".$length);
+                Log::info("These are the books I have gotten from query".$books);
+                $book=$books[0];
+                Log::info("This is the id of that book ".$book->book_id);
+                $book=Book::find($book->book_id);
+                $email=$book->email;
+                Log::info("The person to send an email to ".$email);
 
                 $current=Carbon::now();
                 $trialExpires=$current->addDays(14);
@@ -182,20 +182,19 @@ class BookUsersController extends Controller
     public function getBooks()
     {
 
-        $user=Auth::user();
+        $user=User::find(20);
         $count=$user->books;
         Log::info("We are trying to get count ".$count);
 
         $count->each(function ($item, $key)
         {
             $date = $item->due_date;
-            if($date != null)
+            if($date !== null)
             {
                 $this->countvar=$this->countvar+1;
             }
         });
 
-       dd($this->countvar);
-
+        dd($count);
     }
 }

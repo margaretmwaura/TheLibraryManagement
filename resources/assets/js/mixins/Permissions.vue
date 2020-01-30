@@ -57,12 +57,7 @@
 
 
         },
-        mounted() {
-            this.$store.dispatch('getallstatasesmut');
-        },
-        computed: {
-            ...mapGetters(['returnstatuses']),
-        },
+
     };
 </script>
 
