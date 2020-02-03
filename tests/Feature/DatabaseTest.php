@@ -22,7 +22,6 @@ class DatabaseTest extends TestCase
    use WithoutMiddleware;
     public function test_signed_in_user_can_see_logo()
     {
-//        factory(Role::class)->create(['id' => 35]);
         $user = factory(User::class)->create();
         $this->actingAs($user);
         $this->get('/')->assertSee('Cytonn Libraries');
@@ -31,7 +30,6 @@ class DatabaseTest extends TestCase
     {
         Event::fake();
         $this->withoutExceptionHandling();
-//        $role = factory(User::class)->make();
         $user = factory(User::class)->create();
         $this->post('/books',[
             'name' => 'This is Maggie',
@@ -39,7 +37,6 @@ class DatabaseTest extends TestCase
             'status_id' => 6,
         ]);
         $this->assertCount(1,Book::all());
-//        $this->assertDatabaseHas('writeups', array $data);
     }
     public function test_getting_books_from_database()
     {

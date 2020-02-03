@@ -164,11 +164,11 @@
                 }
                 if(id === 35)
                 {
-                    return "Admin";
+                    return "Normal";
                 }
                 if(id === 37)
                 {
-                    return "Normal"
+                    return "Admin"
                 }
             },
             showSubscriptions() {

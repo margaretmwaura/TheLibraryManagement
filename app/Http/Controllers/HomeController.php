@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
 
-          $users = User::all();
+          $users=User::all();
         return view('home') -> with('users',$users);
 
 
@@ -35,7 +35,7 @@ class HomeController extends Controller
     public function admin()
     {
 
-        $users = User::all();
+        $users=User::all();
         return view('admin') -> with('users',$users);
 
 

@@ -42,9 +42,9 @@ class weeklyreport extends Command
      */
     public function handle()
     {
-        $admin = User::where('role_id',9)->get();
-        $adminone = $admin[0];
-        $adminemail = $adminone->email;
+        $admin=User::where('role_id',9)->get();
+        $adminone=$admin[0];
+        $adminemail=$adminone->email;
         $bookcollection = DB::table('book_user')->select('due_date', 'borrow_date', 'order_date', 'return_date', 'name', 'email')->get();
         Mail::to('mwauramargaret1@gmail.com')->send(new weeklyemail($bookcollection));
     }

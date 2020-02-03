@@ -21,7 +21,7 @@ class BookUsersController extends Controller
     {
         $statuss=\App\Models\Status::where('name','NOTAVAILABLE')->get();
         $status=$statuss[0];
-        $statusid = $status->id;
+        $statusid=$status->id;
 
 
         Log::info($request->all());
@@ -37,7 +37,7 @@ class BookUsersController extends Controller
         $book=Book::find($id);
         $book->borrow_date=$current;
         $book->due_date=$trialExpires;
-        $name = $book->name;
+        $name=$book->name;
 
         //Changing status
         $book->status_id=$statusid;
@@ -77,12 +77,14 @@ class BookUsersController extends Controller
     public function getAllBooks()
     {
 //        $users = User::all();
-        $bookcollection=DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();;
+//        $bookcollection=DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();;
+
+        $bookcollection=Book::with('users')->get();
         return response()->json($bookcollection);
     }
     public function sendingemails()
     {
-      $data = DB::table('book_user')->select("due_date","order_date","email")->whereNotNull("due_date")->get();
+      $data = Book::with('users')->whereNotNull("due_date")->get();
         try{
             $data->each(function ($item, $key) {
                 Log::info("The due date " .$item->due_date);
@@ -110,9 +112,8 @@ class BookUsersController extends Controller
         Log::info("This is the entire request ",$request->all());
         Log::info("User has returned the book which is ".$bookname." and its id is ");
 
-        $books = DB::table('books')->where('name',$bookname)->get();
-        $users = DB::table('users')->where('email',$useremail)->get();
-
+        $books = Book::where('name',$bookname)->get();
+        $users = User::where('email',$useremail)->get();
 
         Log::info("This is the email of user ". $useremail);
 
@@ -122,9 +123,9 @@ class BookUsersController extends Controller
         $book->save();
 
         Log::info("The id of the book is ".$book->id);
-        $user = $users[0];
-        $user = User::find($user->id);
-        $id = $user->id;
+        $user=$users[0];
+        $user=User::find($user->id);
+        $id=$user->id;
         Log::info("This is the id of the user ".$id);
 
         try{
@@ -132,8 +133,8 @@ class BookUsersController extends Controller
 
             $id=$user->id;
             // get an email for a user who had ordered the book
-            $books=DB::table('book_user')->where('name', $bookname)->whereNotNull("borrow_date")->get();
-            $length =count($books);
+            $books=Book::with('users')->where('name', $bookname)->whereNotNull("borrow_date")->get();
+            $length=count($books);
 
             if($length != 0)
             {
@@ -158,7 +159,7 @@ class BookUsersController extends Controller
                 $book->status_id=$statusid;
                 Log::info("The book is now available");
                 $book->save();
-//                Mail::to("mwauramargaret1@gmail.com")->send(new collectbook($bookname));
+                Mail::to($email)->send(new collectbook($bookname));
             }
             else{
                 $statuss=\App\Models\Status::where('name','AVAILABLE')->get();
@@ -169,7 +170,7 @@ class BookUsersController extends Controller
                 $book->save();
             }
 
-            $bookcollection=$data=DB::table('book_user')->select('due_date', 'borrow_date','order_date','return_date','name','email')->get();
+            $bookcollection =Book::with('users')->get();
             return response()->json($bookcollection);
         }
        catch (\Exception $e)
@@ -189,12 +190,11 @@ class BookUsersController extends Controller
         $count->each(function ($item, $key)
         {
             $date = $item->due_date;
-            if($date !== null)
+            if($date!==null)
             {
                 $this->countvar=$this->countvar+1;
             }
         });
 
-        dd($count);
     }
 }
